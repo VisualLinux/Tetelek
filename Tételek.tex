@@ -4,7 +4,7 @@
 \usepackage[magyar]{babel}
 \usepackage[margin=3cm]{geometry}
 \usepackage[section]{placeins}
-\usepackage{amsmath,amssymb,tikz,fancyhdr,commath,multirow,amsthm,gensymb,etoolbox,csquotes,float,outlines,mathtools,pgfplots,makecell}
+\usepackage{amsmath,amssymb,tikz,fancyhdr,commath,multirow,amsthm,gensymb,etoolbox,csquotes,float,outlines,mathtools,pgfplots,makecell,yhmath}
 \setquotestyle[quotes]{german}
 \usetikzlibrary{shapes,decorations.pathreplacing,arrows,fit}
 
@@ -19,6 +19,12 @@
 \newcommand\addvmargin[1]{
 	\node[fit=(current bounding box),inner ysep=#1,inner xsep=0]{};
 }
+\makeatletter
+\newcommand{\ray}{%
+	\mathpalette {\overarrow@\rayfill@}}
+\def\rayfill@{\arrowfill@{\mkern4mu\mapstochar\relbar}\relbar{\mkern 4.08mu}}%
+\makeatother
+\renewcommand{\vec}{\underline}
 \fancyhead[LE,RO]{\getcurrentref{chapter}}
 \fancyhead[RE,LO]{Horváth Dávid}
 \newtheorem{theorem}{Tétel}[section]
@@ -224,7 +230,6 @@
 		a 3 pont síkjára, ha a 3 pont nem esik egy egyenesbe, vagy üres halmaz, ha a 3 pont egy
 		egyenesbe esik.
 	\end{theorem}
-	\pagebreak
 	\begin{theorem}
 		Három egyenstől egyenlő távolságra lévő pontok halmaza a síkon:
 		\begin{itemize}
@@ -378,6 +383,12 @@
 		\item Kifejezések legbővebb értelmezési tartományának meghatározása.
 		\item Függvény értékkészletének megállapítása
 	\end{itemize}
+\section{Matematikatörténet}
+	\begin{outline}
+		\1 Gauss (XVIII-XIX. század)
+			\2 Komplex számok
+			\2 $\sqrt{-1}=i$
+	\end{outline}
 \chapter{Oszthatóság}
 \section{Oszthatóság}
 	\begin{definition}
@@ -444,10 +455,6 @@
 		Két vagy több pozitív egész szám legnagyobb közös osztója a közös osztók közül a legnagyobb. Jele: $(a; b)$.
 	\end{definition}
 	Előállítása: a számok prímtényezős alakjában, a közös prímtényezőket a hozzájuk tartozó legkisebb kitevővel vesszük és összeszorozzuk.
-	\begin{equation*}
-		\left(\prod_{i=1}^{k}p_i^{\alpha_i};\prod_{i=1}^{k}p_i^{\beta_i}\right)=
-		\prod_{i=1}^{k} p_i^{\text{min}(\alpha_i,\beta_i)}
-	\end{equation*}
 	\begin{definition}
 		Ha két pozitív egész szám legnagyobb közös osztója 1, akkor a két szám relatív prím.
 	\end{definition}
@@ -456,11 +463,9 @@
 		közül a legkisebb. Jele: $[a; b]$.
 	\end{definition}
 	Előállítása: felírjuk a számok prímtényezős alakját, az összes prímtényezőt	a hozzájuk tartozó legnagyobb kitevővel vesszük és összeszorozzuk.
-	\begin{gather*}
-		\left(\prod_{i=1}^{k}p_i^{\alpha_i};\prod_{i=1}^{k}p_i^{\beta_i}\right)=
-		\prod_{i=1}^{k} p_i^{\text{max}(\alpha_i,\beta_i)}\\
+	\begin{equation*}
 		(a;b)*[a;b]=a*b
-	\end{gather*}
+	\end{equation*}
 \section{Számrendszerek}
 	\begin{definition}
 		Az a alapú számrendszer helyi értékei: $a^k$, ahol $k\in\mathbb{N}$. Az a alapú számrendszerben a-féle számjegy van: $0,1,...,a-1$, ha a>10, betűket használunk számjegyként.
@@ -474,8 +479,24 @@
 	\begin{itemize}
 		\item Legnagyobb közös osztó: törtek egyszerűsítése
 		\item Legkisebb közös többszörös: törtek közös nevezőre hozása
-		\item Kétismeretlenes egyenlet megoldása a természetes számok halmazán
 	\end{itemize}
+\section{Matematikatörténet}
+	\begin{outline}
+		\1 Jacques Hadamard: XIX. század:
+			\2 $\pi(n)$: n-nél kisebb prímek száma
+			\2 $\pi(n)\sim \int_{2}^{n} \frac{dx}{\ln x}$
+			\begin{equation*}
+				\lim\limits_{n\to\infty} \frac{\pi(n)}{\int_{2}^{n} \frac{dx}{\ln x}}=1
+			\end{equation*}
+		\1 A 2-es alapú számrendszert XVII. században Leibniz ismertette.
+			\2 Általános használata XX. században, számítógépek megjelenésével terjedt el
+		\1 Goldbach: XVIII. század Eulernek írt levélben:
+			\2 Erős: Minden kettőnél nagyobb páros szám felírható két prímszám összegeként
+				\3 Megoldatlan
+			\2 Gyenge: Minden 5-nél nagyobb egész szám felírható három prímszám összegeként
+				\3 Erősből következik
+				\3 Harald Helfgott 2013-ban bizonyította
+	\end{outline}
 \chapter{Logika}
 \section{A matematikai logika fogalma}
 	A matematikai logika a gondolkodás matematikai formában kifejezhető, matematikai eszközökkel	vizsgálható összefüggéseinek, törvényeinek feltárásával foglalkozik. Fõ feladata a következtetések helyességének vizsgálata.
@@ -1464,5 +1485,1622 @@
 	\end{outline}
 \chapter{Deriválás}
 \section{Függvény fogalma, értelmezési tartomány, értékkészlet}
+	\begin{definition}
+		Legyen $A$ és $B$ két nem üres halmaz. Azt mondjuk, hogy megadunk egy $A$ halmazon értelmezett $B$-beli értéket felvevő függvényt, ha $A$ minden eleméhez hozzárendeljük $B$ egy elemét. Jele: $f:\ A\mapsto B$
+	\end{definition}
+	\begin{definition}
+		Értelmezési tartománynak nevezzük az $A$ halmazt. Jele: $D_f$
+	\end{definition}
+	\begin{definition}
+		Értékkészlet a $B$ halmaz azon elemeiből álló halmaz, amelyek a hozzárendelésnél fellépnek. Jele: $R_f$
+	\end{definition}
+	\begin{definition}
+		Ha $c\in D_f$, akkor a $c$ helyen felvett függvényértéket $f(c)$-vel jelöljük, ez a helyettesítési, vagy függvényérték.
+	\end{definition}
+	\begin{definition}
+		Ha az értelmezési tartomány és az értékkészlet is számhalmaz, akkor a függvényt grafikonon tudjuk szemléltetni. A grafikon az $(x;f(x))$ pontok halmaza.
+	\end{definition}
+\section{Függvénytulajdonságok}
+	\subsection{Lokális függvénytulajdonságok}
+	Zérushely, monotonitás, lokális szélsőérték, görbület, inflexió, pontbeli folytonosság.
+	\begin{definition}[Zérushely]
+		Az értelmezési tartomány azon $x_0$ eleme, ahol a függvény értéke 0. $f(x_0)=0$.
+	\end{definition}
+	\begin{definition}[Monotonitás]
+		Az $f$ függvény az értelmezési tartományának egy intervallumában monoton nő, ha az intervallum minden olyan $x_1, x_2$ helyén, amelyre $x_1<x_2$, $f(x_1)\le f(x_2)$.
+		
+		Az $f$ függvény az értelmezési tartományának egy intervallumában monoton csökken, ha az intervallum minden olyan $x_1, x_2$ helyén, amelyre $x_1<x_2$, $f(x_1)\ge f(x_2)$.
+		
+		Ha az egyenlőtlenségben az egyenlőség nincs megengedve, akkor szigorú monotonitásról
+		beszélünk.
+	\end{definition}
+	\begin{definition}[Lokális szélsőérték]
+		Az $f$ függvénynek az $x_0\in D_f$ helyen lokális maximuma van, ha az $x_0$-nak van olyan $I$ környezete, amelynek minden $x\in D_f$ pontjában $f(x)\le f(x_0)$. Az $x_0$ helyet lokális maximumhelynek nevezzük.
+		
+		Az $f$ függvénynek az $x_0\in D_f$ helyen lokális minimuma van, ha az $x_0$-nak van olyan $I$ környezete, amelynek minden $x\in D_f$ pontjában $f(x)\ge f(x_0)$. Az $x_0$ helyet lokális minimumhelynek nevezzük.
+	\end{definition}
+	A monotonitás és a szélsőérték definíciójából következik, hogy ahol a függvény monotonitást
+	vált, ott lokális szélsőértéke van.
+	\begin{definition}[Görbület]
+		A függvényt egy intervallumban konvexnek nevezzük, ha az intervallum bármely két $x_1,x_2$ pontjára teljesül: $f\left(\frac{x_1+x_2}{2}\right)\le\frac{f(x_1)+f(x_2)}{2}$. Ha az egyenlőtlenség fordított irányú, akkor a függvény konkáv az adott intervallumon.
+	\end{definition}
+	\begin{definition}[Inflexiós pont]
+		A függvénygörbének azt a pontját, ahol a görbe konvexből konkávba, vagy
+		konkávból konvexbe megy át, inflexiós pontnak nevezzük.
+	\end{definition}
+	\begin{definition}[Pontbeli folytonosság]
+		Az $f$ függvény értelmezési tartományának egy $x_0$ pontjában folytonos, ha létezik $x_0$ pontban határértéke, és ez megegyezik a helyettesítési értékével, azaz: $f(x_0)=\lim\limits_{x\to x_0}f(x)$
+	\end{definition}
+	\subsection{Globális függvénytulajdonságok}
+	Értelmezési tartomány, értékkészlet, globális (abszolút) szélsőérték, paritás, periodikusság, intervallumbeli folytonosság, korlátosság.
+	\begin{definition}[Globális szélsőérték]
+		Az $f$ függvénynek az $x_0\in D_f$ helyen globális maximuma van, ha $\forall x\in D_f\ f(x)\le f(x_0)$. Az $x_0$ helyet globális maximumhelynek nevezzük.
+		
+		Az $f$ függvénynek az $x_0\in D_f$ helyen globális minimuma van, ha $\forall x\in D_f\ f(x)\ge f(x_0)$. Az $x_0$ helyet globális maximumhelynek nevezzük.
+	\end{definition}
+	\begin{definition}[Paritás]
+		Az $f$ függvény páros, ha \\
+		\begin{equation*}
+			x\in D_f\implies (-x)\in D_f\wedge\forall x\in D_f f(x)=f(-x)
+		\end{equation*}
+		
+		Az $f$ függvény páratlan, ha \begin{equation*}
+			x\in D_f\implies (-x)\in D_f\wedge\forall x\in D_f f(x)=-f(-x)
+		\end{equation*}
+	\end{definition}
+	Páros függvények grafikonja tengelyesen szimmetrikus az y tengelyre (pl.: $x^{2n},|x|,\cos x$). Páratlan függvények grafikonja középpontosan szimmetrikus az origóra (pl.: $x^{2n+1},\frac{1}{x},\sin x,\text{tg} x$)
+	\begin{definition}[Periodikusság]
+		Az $f$ függvény periodikus, ha 
+		\begin{equation*}
+			\exists p\in\mathbb{R}\ p\ne0\ x\in D_f\implies (x+p)\in D_f\wedge\forall x\in D_f\ f(x)=f(x+p)
+		\end{equation*}
+		$p$ a függvény periódusa (pl.: trigonometrikus függvények, törtrész függvény)
+	\end{definition}
+	\begin{definition}[Intervallumbeli folytonosság]
+		Az $f$ függvény egy nyílt intervallumban folytonos, ha az intervallum minden pontjában folytonos.
+	\end{definition}
+	Pl.: Folytonos: $x^n, \log_a x, a^x, \sin x, \cos x$. Nem folytonos: egészrész, $\frac{1}{x}$ tg $x$, ctg $x$.
+	\begin{definition}[Korlátosság]
+		Az $f$ függvény felülről korlátos az értelmezési tartományának egy $I$ intervallumában, ha $\exists K\ \forall x\in I\ f(x)\le K$. Egy függvény felső korlátai közül a legkisebbet felső határnak (szuprémumnak) nevezzük.
+		
+		Az $f$ függvény alulról korlátos az értelmezési tartományának egy $I$ intervallumában, ha $\exists k\ \forall x\in I\ f(x)\ge k$. Egy függvény alsó korlátai közül a legnagyobbat felső határnak (szuprémumnak) nevezzük.
+		
+		Egy függvény korlátos, ha alulról és felülről is korlátos.
+	\end{definition}
+\section{Differenciálszámítás}
+	\begin{definition}
+		Legyen $f$ egy $]a,b[$ intervallumon értelmezett függvény és $x_0$ az értelmezési tartomány egy pontja. Ekkor a $g(x)=\frac{f(x)-f(x_0)}{x-x_0}$ függvényt az $f$ függvény $x_0$ pontjához tartozó különbségi hányados (differenciahányados) függvényének nevezzük.
+	\end{definition}
+	\begin{definition}
+		Az $f$ függvény $x_0$ ponthoz tartozó differenciahányadosának az $x_0$ helyen vett határértékét, ha létezik és véges az $f$ függvény $x_0$ pontbeli differenciálhányadosának, vagy deriváltjának nevezzük. $f'(x_0)=\lim\limits_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}$
+	\end{definition}
+	\begin{definition}
+		Ha egy függvénynek egy pontban van deriváltja, akkor azt mondjuk, hogy a függvény
+		ebben a pontban differenciálható. Az $x_0$ pontbeli differenciálhányados egy ábrázolható függvény esetében a függvény grafikonjának $(x_0, f(x_0))$ pontjához húzott érintő meredeksége.
+	\end{definition}
+	\begin{definition}
+		Ha $f$ függvénynél az értelmezési tartomány minden olyan pontjához, ahol $f$ differenciálható hozzárendeljük a differenciálhányados értékét, akkor az $f$ függvény differenciálhányados (derivált) függvényét kapjuk. Jelölés: $f'(x)$.
+	\end{definition}
+	\begin{theorem}[Deriválási szabályok]
+		$f$ és $g$ függvények deriválhatóak $x$ helyen és deriváltjuk $f'(x),\ g'(x)$
+		\begin{enumerate}
+			\item $(c)'$, $c=$állandó
+			\item $(c*f(x))'=c*f'(x)$, $c\in\mathbb{R}$
+			\item $(f(x)\pm g(x))'=f'(x)\pm g(x)$
+			\item $(f(x)*g(x))'=f'(x)*g(x)+f(x)*g'(x)$
+			\item $\left(\frac{f(x)}{g(x)}\right)=\frac{f'(x)*g(x)-f(x)*g'(x)}{g^2(x)}$
+			\item $(f(g(x)))'=f'(g(x))*g'(x)$
+		\end{enumerate}
+	\end{theorem}
+	\begin{proof}[Szorzatszabály bizonyítása]
+		\begin{align*}
+		(f(x)*g(x))'=\lim\limits_{x\to x_0}\frac{f(x)*g(x)-f(x_0)*g(x_0)}{x-x_0}=\\
+		=\lim\limits_{x\to x_0}\frac{f(x)*g(x)-f(x)*g(x_0)+f(x)*g(x_0)-f(x_0)*g(x_0)}{x-x_0}=\\
+		=\lim\limits_{x\to x_0}\frac{f(x)*(g(x)-g(x_0))+g(x_0)*(f(x)-f(x_0))}{x-x_0}=\\
+		=\lim\limits_{x\to x_0} f(x)*\frac{g(x)-g(x_0)}{x-x_0}+\lim\limits_{x\to x_0} g(x_0)*\frac{f(x)-f(x_0)}{x-x_0}=\\
+		=f(x)*g'(x)+f'(x)*g(x)
+		\end{align*}
+	\end{proof}
+	\begin{theorem}
+		Elemi függvények deriváltjai
+		\begin{enumerate}
+			\item $(x^n)'=n*x^{n-1}$
+			\item $(a^x)'=a^x*\ln a$, ha $a>0,\ a\ne1$\\
+				  $(e^x)'=e^x$
+			\item $\left(\log_ax\right)=\frac{1}{x*\ln a}$, ha $a>0,\ a\ne1,\ x>0$
+			\item $(\ln x)'=\frac{1}{x}$, ha $x>0$
+			\item $(\sin x)'=\cos x$
+			\item $(\cos x)'=-\sin x$
+		\end{enumerate}
+	\end{theorem}
+\section{A differenciálszámítás alkalmzásai}
+	\subsection{Függvény adott pontbeli érintője}
+	Ha az $f(x)$ függvény az $x_0$ pontban differenciálható, akkor grafikonjának az $(x_0;f(x_0))$ pontban van érintője, és $f'(x_0)$ ebben a pontban az érintő meredeksége. Ekkor a függvény $x_0$-beli érintőjének egyenlete: $y=f'(x_0)*(x-x_0)+f(x_0)$.
+	\subsection{Függvényvizsgálat}
+	\begin{theorem}
+		Legyen az $f$ függvény az $]a,\ b[$ intervallum minden pontjában differenciálható. Ha az intervallum minden x pontjában
+		\begin{itemize}
+			\item $f'(x)>0$, akkor $f$ $]a,\ b[$-n szigorúan monoton nő
+			\item $f'(x)<0$, akkor $f$ $]a,\ b[$-n szigorúan monoton csökken
+			\item $f'(x)\ge0$, akkor $f$ $]a,\ b[$-n monoton nő
+			\item $f'(x)\le0$, akkor $f$ $]a,\ b[$-n monoton csökken
+		\end{itemize}
+	\end{theorem}
+	\begin{theorem}
+		Legyen az $f$ függvény az $]a,b[$ intervallum minden pontjában differenciálható. Ha az intervallum egy $x_0$ pontjában a deriváltja 0 és ott a derivált függvény előjelet vált, akkor $x_0$-ban az $f$ függvénynek lokális szélsőértéke van. Ha negatívból pozitívba vált a deriváltfüggvény előjele, akkor lokális minimuma, ha pozitívból negatívba vált, akkor lokális maximuma van.
+	\end{theorem}
+	\begin{theorem}
+		Legyen az $f$ függvény az $]a,b[$ intervallum minden pontjában kétszer differenciálható. Ha az intervallum egy $x_0$ pontjában az első derivált 0, és a második derivált nem nulla, akkor $x_0$-ban az $f$ függvénynek lokális szélsőértéke van. Ha $f''(x_0)>0$, akkor lokális minimuma, ha $f''(x_0)<0$, akkor lokális maximuma van.
+	\end{theorem}
+	\begin{theorem}
+		Legyen az $f$ függvény $[a,b]$-n kétszer deriválható. Ha $[a,b]$ minden pontjában $f''(x)\ge0$, akkor $f$ az $[a,b]$-n konvex, ha $f''(x)\le0$, akkor konkáv.
+	\end{theorem}
+	\begin{theorem}
+		Legyen az $f$ függvény $[a,b]$-n kétszer deriválható. Ha az intervallum egy $x_0$ pontjában $f''(x_0)=0$, és itt az $f''$ függvény előjelet vált, akkor $x_0$ pontban az $f$ függvénynek inflexiós pontja van.
+	\end{theorem}
+\section{Szélsőérték-problémák vizsgálata differenciálszámítással}
+	\begin{outline}
+		\1 Változók közti összefüggések felírása
+			\2 Több változó: Egyik segítségével többi kifejezése
+			\2 Beírjuk kifejezésbe, melynek szélsőértékét vizsgálni akarjuk
+				\3[->] Egyváltozós függvény, szélsőértékét kell meghatározni
+		\1 Szélsőérték megállapítása differenciálható függvényeknél
+			\2 Lokális szélsőérték van $x_0$-ban, ha az első derivált 0, és a derivált előjelet vált, azaz a második derivált nem 0.
+			\2 Minimuma van, ha a második derivált pozitív, maximuma ha negatív
+			\2 Pl.: $f:\mathbb{R}^+\mapsto\mathbb{R},\ f(x)=x^3-3x\implies f'(x)=3x^2-3\implies f''(x)=6x$
+				\3 $f'(x)$ zérushelye: $x=\pm1$
+				\3 $f''(x)$ előjele: 
+					\4 $f''(-1)=-6$, tehát lokális maximuma van $x=-1$ helyen, értéke $f(-1)=2$
+					\4 $f''(1)=6$, tehát lokális minimuma van $x=1$ helyen, értéke $f(1)=-2$
+	\end{outline}
+\section{Alkalmazások}
+	\begin{outline}
+		\1 Gazdasági problémák
+			\2 Ha egy áru iránti kereslet függ a termék árától, akkor milyen ár esetén érhető el maximális összbevétel?
+		\1 Matematikai problémák
+			\2 Adott sugarú gömbbe írt hengerek közül melyiknek a térfogata maximális?
+		\1 Taylor-sor:
+			\2 $T_n=\frac{f^{(n)}(a)*(x-a)^n}{n!}$
+	\end{outline}
+\section{Matematikatörténet}
+	\begin{outline}
+		\1 XVII. század: Descartes foglalkozott először függvényekkel
+		\1 Cauchy: XVIII-XIX. század: analízis alapvető fogalmainak definiálása
+		\1 Karl Weierstrass: XIX. század: Első olyan publikált függvény, amely mindenhol folytonos, de sehol sem deriválható
+	\end{outline}
+\chapter{Derékszögű háromszögek}
+\section{Derékszögű háromszögek}
+	\begin{definition}
+		Azokat a háromszögeket, amelyeknek valamely szöge 90\degree, azaz derékszög, derékszögű
+		háromszögeknek nevezzük. A derékszöget bezáró két oldalt befogónak, a derékszöggel szemközti oldalt átfogónak nevezzük.
+	\end{definition}
+\section{Derékszögű háromszögekre vonatkozó tételek}
+	\begin{theorem}[Pitagorasz-tétel]
+		Ha egy háromszög derékszögű, akkor befogóinak négyzetösszege egyenlő az átfogó négyzetével.
+	\end{theorem}
+	\begin{theorem}[Pitagorasz-tétel megfordítása]
+		Ha egy háromszög két oldalhosszának négyzetösszege egyenlő a harmadik oldal hosszának négyzetével, akkor a háromszög derékszögű.
+	\end{theorem}
+	\begin{theorem}[Thalész-tétel]
+		Ha egy kör átmérőjének két végpontját összekötjük a kör bármely más pontjával, akkor derékszögű háromszöget kapunk.
+	\end{theorem}
+	\begin{proof}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.4\linewidth]{Thalész.JPG}
+			\caption{}
+			\label{fig:thalesz}
+		\end{figure}
+		\begin{equation*}
+			OA=OC=r\implies OAC \text{ háromszög egyenlő szárú} \implies OAC\angle=OCA\angle=\alpha
+		\end{equation*}
+		\begin{equation*}
+		CA=OB=r\implies OBC \text{ háromszög egyenlő szárú}\implies OBC\angle=BCO\angle=\beta
+		\end{equation*}
+	\end{proof}
+	\begin{theorem}[Thalész-tétel megfordítása]
+		Ha egy háromszög derékszögű, akkor köré írható körének középpontja az átfogó felezőpontja.
+	\end{theorem}
+	\begin{theorem}[Magasságtétel]
+		Derékszögű háromszögben az átfogóhoz tartozó magasság hossza mértani közepe azon két szakasz hosszának, amelyekre a magasság az átfogót osztja.
+	\end{theorem}
+	\begin{theorem}[Befogótétel]
+		Derékszögű háromszög befogójának hossza mértani közepe az átfogó és a befogó
+		átfogóra eső merőleges vetülete hosszának.
+	\end{theorem}
+	\begin{theorem}
+		Derékszögű háromszög beírt körének sugara:
+		\begin{equation*}
+			r=\frac{a+b-c}{2}
+		\end{equation*}
+	\end{theorem}
+\section{Hegyesszögek szögfüggvényeinek definíciója}
+	Két derékszögű háromszög hasonló, ha 1 hegyesszögük megegyezik. Emiatt oldalainak arányát egyik hegyesszöge egyértelműen meghatározza. Erre a függvényszerű kapcsolatra vezetjük be a szögfüggvényeket.
+	\begin{definition}
+		Az $\alpha$ hegyesszöget tartalmazó tetszőleges derékszögű háromszögben:
+		\begin{itemize}
+			\item sin$\alpha$=$\frac{\alpha\text{-val szembeni befogó hossza}}{\text{Átfogó hossza}}$
+			\item cos$\alpha$=$\frac{\alpha\text{ melletti befogó hossza}}{\text{Átfogó hossza}}$
+			\item tg$\alpha$=$\frac{\alpha\text{-val szembeni befogó hossza}}{\alpha\text{ melletti befogó hossza}}$
+			\item ctg$\alpha$=$\frac{\alpha\text{ melletti befogó hossza}}{\alpha\text{-val szembeni befogó hossza}}$
+		\end{itemize}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.4\linewidth]{Derékszög}
+		\end{figure}
+		\begin{equation*}
+			\sin\alpha=\frac{a}{c},\ \cos\alpha=\frac{b}{c},\ \text{tg}\alpha=\frac{a}{b},\ \text{ctg}\alpha=\frac{b}{a}
+		\end{equation*}
+	\end{definition}
+\section{Összefüggések a hegyesszögek szögfüggvényei között}
+	\begin{align*}
+		\text{tg}\alpha&=\frac{\sin\alpha}{\cos\alpha},\ \text{ctg}\alpha=\frac{\cos\alpha}{\sin\alpha},\ \text{tg}\alpha=\frac{1}{\text{ctg}\alpha}\\
+		\sin\alpha&=\cos(90\degree-\alpha),\ \cos\alpha=\sin(90\degree-\alpha)\\
+		\text{tg}\alpha&=\text{ctg}(90\degree-\alpha),\ \text{ctg}\alpha=\text{tg}(90\degree-\alpha)\\
+		\sin^2\alpha+\cos^2\alpha&=1
+	\end{align*}
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|c||c|c|c|c|}
+			\hline
+			&sin&cos&tg&ctg\\\hline\hline
+			30\degree&$\frac{1}{2}$&$\frac{\sqrt{3}}{2}$&$\frac{\sqrt{3}}{3}$&$\sqrt{3}$\\\hline
+			45\degree&$\frac{\sqrt{2}}{2}$&$\frac{\sqrt{2}}{2}$&1&1\\\hline
+			60\degree&$\frac{\sqrt{3}}{2}$&$\frac{1}{2}$&$\sqrt{3}$&$\frac{\sqrt{3}}{3}$\\\hline
+		\end{tabular}
+		\caption{Nevezetes szögek szögfüggvényei}
+	\end{table}
+\section{Szögfüggvények általánosítása}
+	\begin{definition}
+		A koordináta-rendszerben az $\underline{i}(1;0)$ bázisvektor origó körüli $\alpha$ szöggel való elforgatásával keletkező $\underline{e}$ egységvektor első koordinátája az $\alpha$ szög koszinusza, második koordinátája az $\alpha$ szög szinusza.
+	\end{definition}
+	\begin{definition}
+		A $\frac{\sin\alpha}{\cos\alpha}$ hányadost, ha $\cos\alpha\ne0$, vagyis ha $\alpha\ne\frac{\pi}{2}+k\pi(k\in\mathbb{Z})$, az $\alpha$ szög tangensének nevezzük.
+	\end{definition}
+	A koordináta-rendszerben az $\underline{i}$ vektortól $\alpha$ szöggel elforgatott $\underline{e}$ egységvektor egyenese által az origó középpontú, egységsugarú kör $(1;0)$ pontjában húzott érintőből kimetszett pont 2. koordinátája az $\alpha$ szög tangense.
+	\begin{definition}
+		A $\frac{\cos\alpha}{\sin\alpha}$ hányadost, ha $\cos\alpha\ne0$, vagyis ha $\alpha\ne k\pi(k\in\mathbb{Z})$, az $\alpha$ szög kotangensének nevezzük.
+	\end{definition}
+	A koordináta-rendszerben az $\underline{i}$ vektortól $\alpha$ szöggel elforgatott $\underline{e}$ egységvektor egyenese által az origó középpontú, egységsugarú kör $(0;1)$ pontjában húzott érintőből kimetszett pont 1. koordinátája az $\alpha$ szög kotangense.
+\section{Kapcsolat egy szög szögfüggvényei között}
+	\begin{align*}
+		\text{ctg}\alpha&=\frac{1}{\text{tg}\alpha}, \text{ ha }\alpha\ne k\frac{\pi}{2}\ (k\in\mathbb{Z})\\
+		\text{tg}\alpha&=\frac{1}{\text{ctg}\alpha}, \text{ ha }\alpha\ne k\frac{\pi}{2}\ (k\in\mathbb{Z})\\
+		\implies \text{tg}\alpha*\text{ctg}\alpha&=1\ (\alpha\ne k\frac{\pi}{2},\ k\in\mathbb{Z})\\
+		\sin^2\alpha+\cos^2\alpha&=1\ \forall\alpha\in\mathbb{R}
+	\end{align*}
+\chapter{Háromszögek nevezetes vonalai, pontjai és körei}
+\section{Oldalfelező merőlegesek, a háromszög köré írt kör középpontja}
+	\begin{definition}
+		A síkon egy szakasz felezőmerőlegese az az egyenes, amely a szakasz felezőpontjára
+		illeszkedik és merőleges a szakaszra.
+	\end{definition}
+	\begin{theorem}
+		A szakasz felezőmerőlegese a szakasz két végpontjától egyenlő távol lévő pontok halmaza.
+	\end{theorem}
+	\begin{theorem}
+		A háromszög három oldalfelező merőlegese egy pontban metszi egymást. Ez a pont a háromszög
+		köré írt kör középpontja.
+	\end{theorem}
+\section{Szögfelezők, háromszögbe, illetve háromszöghöz írt kör középpontja}
+	\begin{definition}
+		Egy konvex szög szögfelezője a szög csúcsából kiinduló, a szögtartományban haladó
+		azon félegyenes, amely a szöget két egyenlő nagyságú szögre bontja.
+	\end{definition}
+	\begin{theorem}
+		Egy konvex szögtartományban a száraktól egyenlő távolságra lévő pontok halmaza a szögfelező.
+	\end{theorem}
+	\begin{theorem}
+		A háromszög három belső szögfelezője egy pontban metszi egymást. Ez a pont a háromszögbe
+		írt kör középpontja.
+	\end{theorem}
+	\begin{theorem}
+		A háromszög egy belső, és a másik két csúcshoz tartozó külső szögfelezője egy pontban
+		metszi egymást, ez a pont a háromszög hozzáírt körének középpontja. A háromszögnek 3
+		hozzáírt köre van.
+	\end{theorem}
+	\begin{theorem}
+		A háromszög ugyanazon szögének külső és belső szögfelezője merőleges egymásra.
+	\end{theorem}
+\section{Magasságvonalak, a háromszög magasságpontja}
+	\begin{definition}
+		A háromszög magassága az egyik csúcsból a szemközti oldal egyenesére bocsátott merőleges szakasz. A háromszög magasságának egyenese a háromszög magasságvonala.
+	\end{definition}
+	\begin{theorem}
+		A háromszög magasságvonalai egy pontban metszik egymást. Ez a pont a háromszög magasságpontja.
+	\end{theorem}
+	\begin{proof}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.6\linewidth]{Magasság}
+		\end{figure}
+		Húzzunk az ABC háromszög mindhárom csúcsán keresztül párhuzamos egyenest a szemközti oldallal, ez az A'B'C' háromszög.\\
+		$\left(m_c\perp AB\right)\wedge\left(A'B'\perp AB\right)\implies m_c\perp A'B'$. $\left(AB\|A'B'\right)\wedge\left(BC\|B'C'\right)\\
+		\implies$ ABCB' paralelogramma$\implies CB'=AB$. Hasonlóan ABA'C paralelogramma $\implies A'C=AB$, ezekből következik, hogy $B'C=CA'\implies C$ felezőpontja\\
+		$A'B'$-nek$\implies m_c$ oldalfelező merőlegese $A'B'$-nek. 
+		
+		Hasonlóan belátható, hogy $m_a$ és $m_b$ is az $A'B'C'$ háromszög oldalfelező merőlegesei. Az oldalfelező merőlegesekre vonatkozó tétel alapján tudjuk, hogy ezek egy pontban metszik
+		egymást, tehát beláttuk, hogy az $ABC$ háromszög magasságvonalai is egy pontban metszik
+		egymást.
+	\end{proof}
+	A magasságpont hegyesszögű háromszög esetén a háromszög belsejében, derékszögű háromszögnél
+	a derékszögű csúcsban, tompaszögű háromszögnél a háromszögön kívül helyezkedik el.
+\section{Súlyvonalak, a háromszög súlypontja}
+	\begin{definition}
+		A háromszög csúcsát a szemközti oldal felezőpontjával összekötő szakasz a háromszög
+		súlyvonala.
+	\end{definition}
+	\begin{theorem}
+		A háromszög súlyvonalai egy pontban metszik egymást, ezt a pontot a háromszög súlypontjának
+		nevezzük. A súlypont harmadolja a súlyvonalakat úgy, hogy a csúcs felé eső szakasz és az oldal felé eső szakasz aránya $2:1$.
+	\end{theorem}
+\section{Középvonalak}
+	\begin{definition}
+		A háromszög két oldalfelező pontját összekötő szakaszt a háromszög középvonalának
+		nevezzük. Minden háromszögnek 3 középvonala van.
+	\end{definition}
+	\begin{theorem}
+		A háromszög középvonala párhuzamos a felezőpontokat nem tartalmazó oldallal, és fele
+		olyan hosszú.
+	\end{theorem}
+\pagebreak
+\section{Euler-egyenes, Feuerbach-kör}
+	\begin{theorem}[Euler-egyenes]
+		A háromszög magasságpontja, súlypontja és a körülírt kör középpontja egy egyenesen van. A súlypont a másik kettő távolságát harmadolja és a körülírt kör középpontjához van közelebb.
+	\end{theorem}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{Euler}
+	\end{figure}
+	\begin{theorem}[Feuerbach-kör]
+		Egy háromszög oldalainak felezőpontjai, magasságainak talppontjai és a magasságpontot
+		a csúcsokkal összekötő szakaszok felezőpontjai egy körön vannak. Feuerbach kör középpontja (O) felezi a magasságpontot (M) és a köré írható kör középpontját (K) összekötő szakaszt, sugara a háromszög köré írható kör sugarának a fele. Azaz a Feuerbach-kör a körülírható kör M pontra vonatkozó $\lambda=\frac{1}{2}$ arányú középpontos hasonlóság képe.
+	\end{theorem}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{Feuerbach}
+	\end{figure}
+	\begin{theorem}
+		Egy háromszög Feuerbach-köre érinti a háromszög beírt körét, és hozzáírt köreit.
+	\end{theorem}
+\chapter{Összefüggések általános háromszögben}
+\section{Háromszögek csoportosítása}
+	\begin{definition}
+		Háromszög az a zárt szögvonal, amelyeknek 3 oldala és 3 csúcsa van.
+	\end{definition}
+	\begin{definition}
+		Egy háromszög hegyesszögű, ha minden szöge hegyesszög.
+	\end{definition}
+	\begin{definition}
+		Egy háromszög derékszögű, ha van egy 90\degree-os szöge.
+	\end{definition}
+	\begin{definition}
+		Egy háromszög tompaszögű, ha van egy tompaszöge.
+	\end{definition}
+	\begin{definition}
+		Egy háromszög szabályos, ha három oldala egyenlő hosszú.
+	\end{definition}
+	\begin{definition}
+		Egy háromszög egyenlő szárú, ha van két egyenlő oldala.
+	\end{definition}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.6\linewidth]{Csoport}
+	\end{figure}
+\section{Összefüggések a háromszög oldalai között}
+	\begin{theorem}[Háromszög-egyenlőtlenség]
+		A háromszög bármely két oldalának összege nagyobb a harmadiknál:
+		\begin{equation*}
+			a+b>c,\ a+c>b,\ b+c>a
+		\end{equation*}
+	\end{theorem}
+	\begin{theorem}
+		Egy háromszögben bármely két oldal különbségének abszolút értéke kisebb a harmadiknál:
+		\begin{equation*}
+			|a-c|<b,\ |a-b|<c,\ |b-c|<a
+		\end{equation*}
+	\end{theorem}
+	\begin{theorem}[Pitagorasz-tétel]
+		Bármely derékszögű háromszögben a két befogó négyzetének összege egyenlő az átfogó négyzetével.
+	\end{theorem}
+\section{Összefüggések a háromszög szögei között}
+	\begin{theorem}
+		A háromszög belső szögeinek összege: 180\degree
+	\end{theorem}
+	\begin{theorem}
+		A háromszög külső szögeinek összege: 360\degree
+	\end{theorem}
+	\begin{theorem}
+		A háromszög egy külső szöge egyenlő a nem mellette fekvő két belső szög összegével.
+	\end{theorem}
+\section{Összefüggések a háromszög oldalai és szögei között}
+	\begin{theorem}
+		Egy háromszögben egyenlő hosszúságú oldalakkal szemben egyenlő nagyságú szögek vannak,
+		és egyenlő nagyságú szögekkel szemben egyenlő hosszúságú oldalak vannak.
+	\end{theorem}
+	\begin{theorem}
+		Bármely háromszögben két oldal közül a hosszabbikkal szemben nagyobb belső szög van, illetve két szög közül a nagyobbikkal szemben hosszabb oldal van.
+	\end{theorem}
+\pagebreak
+	\begin{definition}
+		Derékszögű háromszögben bevezetjük a szögfüggvények fogalmát a hasonló háromszögek
+		tulajdonságait kihasználva:
+		\begin{itemize}
+			\item sin$\alpha$=$\frac{\alpha\text{-val szembeni befogó hossza}}{\text{Átfogó hossza}}$
+			\item cos$\alpha$=$\frac{\alpha\text{ melletti befogó hossza}}{\text{Átfogó hossza}}$
+			\item tg$\alpha$=$\frac{\alpha\text{-val szembeni befogó hossza}}{\alpha\text{ melletti befogó hossza}}$
+			\item ctg$\alpha$=$\frac{\alpha\text{ melletti befogó hossza}}{\alpha\text{-val szembeni befogó hossza}}$
+		\end{itemize}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.4\linewidth]{Derékszög}
+		\end{figure}
+		\begin{equation*}
+		\sin\alpha=\frac{a}{c},\ \cos\alpha=\frac{b}{c},\ \text{tg}\alpha=\frac{a}{b},\ \text{ctg}\alpha=\frac{b}{a}
+		\end{equation*}
+	\end{definition}
+	\begin{theorem}[Szinusztétel]
+		Egy háromszögben a három oldal áranya megegyezik a velük szemben lévő oldalak szinuszának arányával:
+		\begin{equation*}
+			a:b:c=\sin\alpha:\sin\beta:\sin\gamma
+		\end{equation*}
+	\end{theorem}
+	\begin{outline}
+		\1 Alkalmazása:
+			\2 1 oldal, 2 szög -> bármely oldal
+			\2 2 oldal, nem közbezárt szög:
+				\3 Nagyobbik oldallal szembeni szög -> kisebbikkel szembeni szög
+					\4 Háromszög egyértelműen meghatározott
+				\3 Rövidebbel szembeni szög -> nagyobbikkal szembeni szög
+					\4 Ha szinusz kisebb 1-nél: két megoldás. Háromszög nem egyértelműen meghatározott.
+					\4 Ha szinusz egyenlő 1-el: egy megoldás 90\degree. A háromszög derékszögű
+					\4 Ha szinusz nagyobb 1-nél: nincs ilyen háromszög
+	\end{outline}
+	\begin{theorem}[Koszinusztétel]
+		Egy háromszög egy oldalának négyzete egyenlő a másik két oldal négyzetösszegéből kivonva a két oldal hosszának és a közbezárt szög koszinuszának kétszeres szorzatát:
+		\begin{equation*}
+			c^2=a^2+b^2-2ab\cos\gamma
+		\end{equation*}
+	\end{theorem}
+	\begin{proof}
+		Vezessük be a következő vektorokat:
+		\begin{equation*}
+			\overrightarrow{CB}=\underline{a},\ \overrightarrow{CA}=\underline{b},\ \overrightarrow{BA}=\underline{c}
+		\end{equation*}
+		Legyen: $|\underline{a}|=a,\ |\underline{b}|=b,\ |\underline{c}|=c$
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.5\linewidth]{Cos}
+		\end{figure}
+		Ekkor $\underline{c}=\vec{a}-\vec{b}$. Az egyenlet két oldalát négyzetre emelve:
+		\begin{align*}
+			\vec{c}^2&=(\vec{a}-\vec{b})^2\\
+			\vec{c}^2&=\vec{a}^2-2\vec{a}\vec{b}+\vec{b}^2\\
+			c^2&=a^2+b^2-2ab\cos\gamma
+		\end{align*}
+	\end{proof}
+	Következmények:
+	\begin{itemize}
+		\item Ha a háromszög derékszögű, akkor $c^2=a^2+b^2$, ami a Pitagorasz-tétel.
+		\item Ha a háromszög hegyesszögű, akkor bármely két oldalának négyzetösszege nagyobb a harmadik oldal négyzeténél.
+		\item Ha a háromszög tompaszögű, akkor a két rövidebb oldal négyzetösszege kisebb a harmadik oldal négyzeténél.
+	\end{itemize}
+	\begin{outline}
+		\1 Alkalmazás:
+			\2 2 oldal, közbezárt szög -> szemközti oldal
+			\2 3 oldal -> bármely szög
+				\3 Legnagyobbat érdemes kiszámolni, mert egyértelmű megoldást ad
+	\end{outline}
+\chapter{Egybevágóság és hasonlóság}
+\section{Transzformációk}
+	\begin{definition}
+		Geometriai transzformációk azok a függvények, amelyek egy ponthalmazt ponthalmazra képeznek le.
+	\end{definition}
+	\begin{definition}[Távolságtartó leképezés]
+		Bármely két pont távolsága egyenlő képeik távolságával.
+	\end{definition}
+	\begin{definition}
+		A geometriai transzformációk közül a távolságtartó transzformációkat egybevágósági
+		transzformációknak nevezzük.
+	\end{definition}
+	Síkbeli egybevágósági transzformációk: tengelyes tükrözés, pontra vonatkozó (középpontos)
+	tükrözés, pont körüli elforgatás, eltolás.
+	\begin{definition}[Tengelyes tükrözés]
+		Adott a sík egy $t$ egyenese, ez a tengelyes tükrözés tengelye. A $t$ tengelyre vonatkozó tengelyes tükrözés a sík tetszőleges $t$-re nem illeszkedő $P$ pontjához azt a $P'$ pontot rendeli, amelyre fennáll, hogy a $PP'$ szakasz felezőmerőlegese a t tengely. A $t$ egyenes képe önmaga.
+	\end{definition}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.3\linewidth]{Tengely}
+	\end{figure}
+	\begin{definition}[Középpontos tükrözés]
+		Adott a sík egy $O$ pontja, a középpontos tükrözés középpontja. Az $O$ pontra vonatkozó középpontos tükrözés a sík egy tetszőleges $O$-tól különböző $P$ pontjához azt a $P'$ pontot rendeli, amelyre az $O$ pont a $PP'$ szakasz felezőpontja Az $O$ pont képe önmaga.
+	\end{definition}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.3\linewidth]{KPont}
+	\end{figure}
+	\begin{definition}[Pont körüli forgatás]
+		Adott a sík egy $O$ pontja és egy $\alpha$ irányított szög. Az $O$ pont körüli $\alpha$ szögű a sík egy tetszőleges $O$-tól különböző $P$ pontjához azt a $P'$ pontot rendeli, amelyre teljesül, hogy $POP'\angle$ irány és nagyság szerint megegyezik $\alpha$-val és $OP = OP'$. Az $O$ pont képe önmaga.
+	\end{definition}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.3\linewidth]{Forg}
+	\end{figure}
+	\begin{definition}[Eltolás]
+		Adott egy $\vec{v}$ vektor. A $\vec{v}$ vektorral való eltolás a sík tetszőleges $P$ pontjához azt a $P'$ pontot rendeli, amelyre $\overrightarrow{PP'}=\vec{v}$.
+	\end{definition}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.3\linewidth]{Elt}
+	\end{figure}
+\section{Alakzatok egybevágósága}
+	\begin{definition}
+		Két alakzat egybevágó, ha van olyan egybevágósági transzformáció, amely az egyik alakzatot a másikba viszi. Jele: $A\cong B$.
+	\end{definition}
+	\begin{theorem}
+		Két háromszög akkor, és csak akkor egybevágó, ha:
+		\begin{itemize}
+			\item Megfelelő oldalaik hossza páronként egyenlő
+			\item 2-2 oldaluk hossza páronként egyenlő, és az ezek által közbezárt szögek nagysága egyenlő
+			\item 2-2 oldaluk hossza páronként egyenlő és e 2-2 oldal közül a hosszabbikkal szemközti szögük nagysága egyenlő
+			\item 1-1 oldaluk hossza páronként egyenlő és két-két szögük páronként egyenlő
+		\end{itemize}
+	\end{theorem}
+	\begin{theorem}
+		Két sokszög akkor és csak akkor egybevágó, ha a következő feltételek egyike teljesül:
+		\begin{itemize}
+			\item Megfelelő oldalaik hossza és a megfelelő átlóik hossza páronként egyenlő
+			\item Megfelelő oldalaik hossza páronként egyenlő és megfelelő szögeik páronként egyenlők
+		\end{itemize}
+	\end{theorem}
+\section{Hasonlósági transzformáció: középpontos hasonlóság}
+	\begin{definition}[Középpontos hasonlósági transzformáció]
+		Adott egy $O$ pont, a transzformáció középpontja, és egy $\lambda$ 0-tól különböző valós szám, a hasonlóság aránya. A transzformáció a sík tetszőleges $P$ pontjához azt a $P'$ pontot rendeli, amely az $OP$ egyenes azon pontja, amelyre $OP'=|\lambda|*OP$, és ha $\lambda>0$, akkor $P'\in\ray{OP}$, ha $\lambda<0$, akkor $P'\notin \ray{OP}$ 
+	\end{definition}
+	Ha $|\lambda|>1$, akkor középpontos nagyításról, ha $|\lambda|<1$, akkor kicsinyítésről beszélünk, ha $|\lambda|=1$, akkor a transzformáció egybevágóság.
+	\begin{definition}
+		Véges sok középpontos hasonlósági transzformáció és véges sok egybevágósági transzformáció
+		egymás utáni végrehajtásával kapott transzformációkat hasonlósági transzformációnak nevezzük.
+	\end{definition}
+\section{Alakzatok hasonlósága}
+	\begin{definition}
+		Két alakzat hasonló, ha van olyan hasonlósági transzformáció, amely az egyik alakzatot a másikba viszi. Jele: $A\sim B$.
+	\end{definition}
+	\begin{theorem}
+		Két háromszög akkor és csak akkor hasonló, ha:
+		\begin{itemize}
+			\item Megfelelő oldalaik hossza páronként egyenlő
+			\item 2-2 oldalhosszuk aránya, és az ezek által közbezárt szögek nagysága egyenlő
+			\item 2-2 oldalhosszuk aránya egyenlő, és e 2-2 oldal közül a hosszabbikkal szemközti szögük nagysága egyenlő
+			\item 2-2 szögük páronként egyenlő
+		\end{itemize}
+	\end{theorem}
+	\begin{theorem}
+		Két sokszög akkor és csak akkor hasonló, ha megfelelő oldalhosszaik aránya és megfelelő szögeik nagysága páronként egyenlő nagyságú.
+	\end{theorem}
+\section{Transzformációk főbb tulajdonságai}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{Hasonl}
+	\end{figure}
+\section{Hasonlóság alkalmazása háromszögekre vonatkozó tételekben}
+	\begin{theorem}
+		A háromszög középvonala párhuzamos a felezőpontokat nem tartalmazó oldalakkal, és fele olyan hosszú, mint a nem felezett oldal.
+	\end{theorem}
+	\begin{theorem}
+		A háromszög súlyvonalai egy pontban metszik egymást. Ez a pont mindhárom súlyvonalnak a csúcstól távolabbi harmadolópontja.
+	\end{theorem}
+	\begin{theorem}[Szögfelezőtétel]
+		Egy háromszög belső szögfelezője a szemközti oldalt a szomszédos oldalak
+		arányában osztja.
+	\end{theorem}
+	\begin{proof}
+		Az $ABC$ háromszög $A$ csúcsából induló belső szögfelező $BC$ oldalt az $S$ pontban
+		metszi. A $BA$ szakaszt hosszabbítsuk meg $A$-n túl és legyen $AD = b$. Ekkor $AD = AC = b$, ebből következik, hogy az $ACD$ háromszög egyenlő szárú, a $C$-nél és a $D$-nél levő belső szögek egyenlők, az $A$-nál levő külső szög $\alpha$.
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.3\linewidth]{SZFT}
+		\end{figure}
+		
+		$CAD\angle=180\degree-\alpha\implies ACD\angle=ADC\angle=\frac{\alpha}{2}$. $BAS\angle=ADC\angle=\frac{\alpha}{2}\implies AS\|CD$. $CBA\angle$-ra alkalmazva a párhuzamos szelők tételét:
+		\begin{equation*}
+			\frac{CS}{SB}=\frac{DA}{AB}=\frac{AC}{AB}
+		\end{equation*}
+	\end{proof}
+	\begin{theorem}[Magasságtétel]
+		Derékszögű háromszögben az átfogóhoz tartozó magasság hossza mértani közepe azon két szakasz hosszának, amelyekre a magasság az átfogót osztja.
+	\end{theorem}
+	\begin{theorem}[Befogótétel]
+		Derékszögű háromszög befogójának hossza mértani közepe az átfogó és a befogó átfogóra eső merőleges vetülete hosszának.
+	\end{theorem}
+\chapter{Kör és részei}
+\section{Kör és részei}
+	\begin{definition}
+		Azoknak a pontoknak a halmaza a síkon amelyeknek a sík egy adott $O$ pontjától adott
+		$r$ távolságra vannak $O$ középpontú, $r$ sugarú körnek nevezzük.
+	\end{definition}
+	\begin{definition}
+		Azoknak a pontoknak a halmaza a síkon amelyeknek a sík egy adott $O$ pontjától adott
+		$r$ távolságnál nem nagyobb/kisebb távolságra vannak $O$ középpontú, $r$ sugarú zárt/nyílt körlapnak nevezzük.
+	\end{definition}
+	\begin{definition}
+		A körvonal két különböző pontját összekötő szakaszt húrnak nevezzük.
+	\end{definition}
+	\begin{definition}
+		húr egyenesét szelőnek, a középponton áthaladó húrt átmérőnek nevezzük. Az átmérő
+		a kör leghosszabb húrja, hossza: $2r$.
+	\end{definition}
+	\begin{theorem}
+		A kör:
+		\begin{itemize}
+			\item középpontján áthaladó tetszőleges egyenesre nézve tengelyesen szimmetrikus
+			\item középpontjára nézve középpontosan szimmetrikus
+			\item középpontja körüli forgatásra forgásszimmetrikus
+		\end{itemize}
+	\end{theorem}
+	\begin{definition}
+		A körlapnak két sugár közé eső darabja a körcikk.
+	\end{definition}
+	\begin{definition}
+		Egy szelő által a körlapból lemetszett rész a körszelet.
+	\end{definition}
+	\begin{definition}
+		Két kör koncentrikus, ha középpontjaik egybeesnek.
+	\end{definition}
+	\begin{definition}
+		Két koncentrikus körvonal közé eső rész a körgyűrű.
+	\end{definition}
+	\begin{definition}
+		Ha egy szög csúcsa a kör középpontja akkor a szöget középponti szögnek nevezzük.
+	\end{definition}
+	\begin{theorem}
+		Egy adott körben két középponti szöghöz tartozó ívek hosszának aránya, valamint a körcikkek
+		területének aránya megegyezik a középponti szögek arányával.
+		\begin{equation*}
+			\frac{\alpha}{\beta}=\frac{i_\alpha}{i_\beta}=\frac{T_\alpha}{T_\beta}
+		\end{equation*}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.3\linewidth]{Kör1}
+		\end{figure}
+	\end{theorem}
+	\begin{theorem}
+		Egy körben $\alpha$ középponti szögű körcikkhez tartozó ív hossza:
+		\begin{equation*}
+			i_\alpha=2r\pi*\frac{\alpha\degree}{360\degree}=r*\wideparen{\alpha}
+		\end{equation*}
+		A terület:
+		\begin{equation*}
+			T_\alpha=r^2\pi*\frac{\alpha\degree}{360\degree}=\frac{r^2*\wideparen{\alpha}}{2}=\frac{r*i_\alpha}{2}
+		\end{equation*}
+	\end{theorem}
+	\begin{theorem}
+		$R$ és $r$ határolta körgyűrű területe:
+		\begin{equation*}
+			T=R^2\pi-r^2\pi
+		\end{equation*}
+	\end{theorem}
+	\begin{theorem}
+		Körszelet területe:
+		\begin{equation*}
+			T=\frac{r^2*\wideparen{\alpha}}{2}-\frac{r^2\sin\alpha}{2}=\frac{r^2}{2}\left(\wideparen{\alpha}-\sin\alpha\right)
+		\end{equation*}
+	\end{theorem}
+\section{Középponti és kerületi szögek}
+	\begin{definition}
+		Ha egy szög csúcsa egy adott kör középpontja, akkor a szöget középponti szögnek nevezzük. Ebben az esetben a szög szárai két sugárra illeszkednek.
+	\end{definition}
+	\begin{definition}
+		Ha egy szög csúcsa egy adott körvonal egy pontja, szárai a kör két húrja, vagy egy húrja és egy érintője a húr egyik végpontjában, akkor a szöget kerületi szögnek nevezzük.
+	\end{definition}
+	\begin{theorem}[Középponti és kerületi szögek tétele]
+		Adott körben adott ívhez tartozó bármely kerületi szög nagysága fele az ugyanazon ívhez tartozó középponti szög nagyságának.
+	\end{theorem}
+	\begin{theorem}[Kerületi szögek tétele]
+		Egyenlő sugarú körökben az azonos hosszúságú ívekhez tartozó kerületi szögek egyenlő nagyságúak.
+	\end{theorem}
+	\begin{theorem}[Thalész-tétele]
+		Azon pontok halmaza síkon, amelyekből a sík egy AB szakasza derékszögben látszik, az AB átmérőjű körvonal, kivéve az A és a B pontokat.
+	\end{theorem}
+	\begin{definition}
+		Tekintsünk egy $AB$ szakaszt és egy $P$ pontot. Legyen $APB\angle=\alpha$. Ekkor azt mondhatjuk, hogy a $P$ pontból az $AB$ szakasz $\alpha$ szög alatt látszik. Az $\alpha$ szöget látószögnek nevezzük.
+	\end{definition}
+	\begin{definition}
+		Azon pontok halmaza amelyekből a sík egy $AB$ szakasza adott $\alpha\  (0\degree<\alpha<180\degree)$ szög alatt látszik, két, az $AB$ egyenesre szimmetrikusan elhelyezhető körív, melynek neve az $AB$ szakasz $\alpha$ szögű látóköríve. A szakasz két végpontja nem tartozik a ponthalmazba.
+	\end{definition}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Lato}
+	\end{figure}
+\section{Húrnégyszög}
+	\begin{definition}
+		Azokat a négyszögeket, amelyeknek van köré írható körük, húrnégyszögeknek nevezzük.
+	\end{definition}
+	\begin{theorem}
+		Ha egy négyszög húrnégyszög, akkor szemközti szögeinek összege 180\degree
+	\end{theorem}
+	\begin{theorem}
+		Ha egy négyszög szemközti szögeinek összege 180\degree, akkor az húrnégyszög.
+	\end{theorem}
+	\begin{proof}
+		Tegyük fel, hogy létezik olyan négyszög, melynek szemközti szögeinek összege 180\degree, és nem húrnégyszög, vagyis az egyik csúcs $(C)$ nem illeszkedik a másik három által meghatározott körre. Legyen $P$ a $DC$ egyenesnek és a körnek metszéspontja. Legyen $DAB\angle=\alpha\implies BCD\angle=180\degree-\alpha\implies BCP\angle=\alpha$.
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.4\linewidth]{HúrBiz}
+		\end{figure}
+		$ABPD$ húrnégyszög, azaz  $DPB\angle=180\degree-\alpha$. Ebből következik, hogy $BPC$ háromszög egyik szöge $\alpha$, másik szöge $180\degree-\alpha$, amik összege a harmadik szög nélkül $180\degree$, ez viszont nem lehet, mert ellentmond a belső szögek összegére vonatkozó tételnek. Ellentmondásra jutottunk, emiatt a feltevésünk hamis, vagyis ha egy négyszög szemközti szögeinek összege 180\degree, akkor az húrnégyszög.
+	\end{proof}
+	\begin{theorem}[Húrnégyszög-tétel]
+		Egy négyszög akkor és csak akkor húrnégyszög, ha szemközti szögeinek összege 180\degree.
+	\end{theorem}
+	\begin{theorem}
+		Biztosan húrnégyszög a szimmetrikus trapéz (húrtrapéz), a téglalap, és a négyzet.
+	\end{theorem}
+	\begin{theorem}
+		A paralelogramma akkor és csak akkor húrnégyszög, ha téglalap.
+	\end{theorem}
+	\begin{theorem}
+		A húrnégyszög területe:
+		\begin{equation*}
+			T=\sqrt{(s-a)(s-b)(s-c)(s-d)}
+		\end{equation*}
+	\end{theorem}
+\section{Érintőnégyszög}
+	\begin{definition}
+		Azokat a négyszögeket, amelyeknek van beírt körük, érintőnégyszögeknek nevezzük.
+	\end{definition}
+	\begin{theorem}[Érintőnégyszög-tétel]
+		Egy konvex négyszög akkor és csak akkor érintőnégyszög, ha szemközti oldalainak összege egyenlő.
+	\end{theorem}
+	\begin{theorem}
+		Biztosan érintőnégyszög a deltoid, a rombusz, és a négyzet
+	\end{theorem}
+	\begin{theorem}
+		A paralelogramma akkor és csak akkor érintőnégyszög, ha rombusz.
+	\end{theorem}
+	\begin{theorem}
+		Érintőnégyszög területe:
+		\begin{equation*}
+			T=\frac{K*r}{2}=s*r
+		\end{equation*}
+	\end{theorem}
+\chapter{Vektorok}
+\section{Vektor}
+	A vektor alapfogalom, nem definiáljuk, azonban szemléletesen lehet irányított szakasznak nevezni. Jele: $\overrightarrow{AB}=\vec{v}$, $A:$ kezdőpont $B:$ végpont
+	\begin{definition}
+		A vektor abszolút értéke a vektort meghatározó irányított szakasz hossza. Jele: $|\overrightarrow{AB}|$.
+	\end{definition}
+	\begin{definition}
+		Az a vektor amelynek abszolút értéke 0, nullvektor. Jele: $\vec{0}$. Iránya tetszőleges.
+	\end{definition}
+	\begin{definition}
+		Két vektor egyirányú, ha a két vektor párhuzamos, és azonos irányba mutat.
+	\end{definition}
+	\begin{definition}
+		Két vektor ellentétes irányú, ha a két vektor párhuzamos, és ellentétes irányba mutat.
+	\end{definition}
+	\begin{definition}
+		Két vektor egyenlő, ha egyirányúak és abszolút értékük egyenlő.
+	\end{definition}
+	\begin{definition}
+		Két vektor egymás ellentettje, ha ellentétes irányúak és abszolút értékük egyenlő.
+	\end{definition}
+\section{Vektorműveletek}
+	\begin{definition}
+		Az $\vec{a}$ és $\vec{b}$ vektorok összege annak az eltolásnak a vektora, amellyel helyettesíthető az először $\vec{a}$ vektorral, majd a $\vec{b}$ vektorral történő eltolás. Jele: $\vec{a}+\vec{b}$.
+	\end{definition}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{Összeg}
+	\end{figure}
+	\begin{outline}
+		\1 Tulajdonságok
+			\2 $\vec{a}+(-\vec{a})=\vec{0}$
+			\2 Kommutatív: $\vec{a}+\vec{b}=\vec{b}+\vec{a}$
+			\2 Asszociatív: $(\vec{a}+\vec{b})+\vec{c}=\vec{a}+(\vec{b}+\vec{c})$
+	\end{outline}
+	\begin{definition}
+		Az $\vec{a}-\vec{b}$ különbségvektor az a vektor, amelyhez a $\vec{b}$ vektort adva az $\vec{a}$ vektort kapjuk. Jele: $\vec{a}-\vec{b}$
+	\end{definition}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.4\linewidth]{Kül}
+	\end{figure}
+	$\vec{a}-\vec{b}$, és $\vec{b}-\vec{a}$ egymás ellentettjei.
+	\begin{definition}
+		Egy $\vec{a}$ vektor tetszőleges $\lambda$ valós számmal (skalár) vett szorzata olyan vektor, amely abszolút értéke $|\lambda|*|\vec{a}|$ és $\lambda>0$ esetén $\vec{a}$-val egyirányú, egyébként ellentétes irányú
+	\end{definition}
+	\begin{outline}
+		\1 Tulajdonságok
+			\2 Disztributív: 
+			\begin{align*}
+				\alpha*\vec{a}+\beta*\vec{a}&=(\alpha+\beta)*\vec{a}\\
+				\alpha*\vec{a}+\alpha*\vec{b}&=\alpha*(\vec{a}+\vec{b})
+			\end{align*}
+			\2 Asszociatív: 
+			\begin{equation*}
+				\alpha*(\beta*\vec{a})=(\alpha*\beta)*\vec{a}
+			\end{equation*}
+	\end{outline}
+\section{Vektorok felbontása}
+	\begin{definition}
+		Tetszőleges $\vec{a},\vec{b}$ vektorokkal és $\alpha,\beta$ valós számokkal képzett $\vec{v}=\alpha*\vec{a}+\beta*\vec{b}$ vektort az $\vec{a},\vec{b}$ vektorok lineáris kombinációjának nevezzük.
+	\end{definition}
+	\begin{theorem}
+		Ha $\vec{a};\vec{b}\ne\vec{0}$ és $\vec{a}\|\vec{b}$, akkor pontosan egy olyan $\alpha\in\mathbb{R}$ létezik, hogy $\vec{b}=\alpha*\vec{a}$.
+	\end{theorem}
+	\begin{theorem}
+		Ha $\vec{a};\vec{b}\ne\vec{0},\ \vec{a}\|\vec{b}$, akkor a velük egy síkban lévő minden $\vec{c}$ vektor egyértelműen előáll $\vec{a}$ és $\vec{b}$ vektorok lineáris kombinációjaként.
+	\end{theorem}
+	\begin{definition}
+		A lineáris kombinációban szereplő $\vec{a}$ és $\vec{b}$ vektorokat bázisvektoroknak nevezzük.
+	\end{definition}
+\section{Vektorok koordinátái}
+	\begin{definition}
+		A síkbeli derékszögű $(x;y)$ koordináta-rendszer bázisvektorai az origóból az $(1;0)$ pontba mutató $\vec{i}$, és a $(0;1)$ pontba mutató $\vec{j}$ egységvektorok.
+	\end{definition}
+	\begin{definition}
+		A derékszögű koordináta-rendszerben az $A(a_1,a_2)$ pont helyvektora az origóból az $A$ pontba mutató vektor
+	\end{definition}
+	\begin{definition}
+		A derékszögű koordináta-rendszerben egy vektor koordinátáinak nevezzük az origó kezdőpontú, vele egyenlő helyvektor végpontjának koordinátáit. Jele: $\vec{a}(a_1,a_2)$
+	\end{definition}
+	\begin{theorem}
+		A koordinátasík összes $\vec{v}$ vektora egyértelműen előáll $\vec{i}$ és $\vec{j}$ vektorok lineáris kombinációjaként.
+	\end{theorem}
+	\begin{theorem}
+		Vektor koordinátáinak kiszámítása kezdő- és végpontjának segítségével:
+		\begin{equation*}
+			A(a_1,a_2),\ B(b_1,b_2)\implies \overrightarrow{AB}(b_1-a_1,b_2-a_2)
+		\end{equation*}
+	\end{theorem}
+	\begin{theorem}
+		Ha a $\vec{v}$ vektor koordinátái $\vec{v}(v_1,v_2)$, akkor a vektor hossza: $|\vec{v}|=\sqrt{v_1^2+v_2^2}$.
+	\end{theorem}
+	\subsection{Vektorműveletek koordinátákkal}
+	Legyenek $\vec{a}(a_1,a_2)$ és $\vec{b}(b_1,b_2)$ vektorok.
+	\begin{theorem}[Összeg]
+		\begin{equation*}
+			\vec{a}+\vec{b}(a_1+b_1,a_2+b_2)
+		\end{equation*}
+	\end{theorem}
+	\begin{theorem}[Különbség]
+		\begin{equation*}
+		\vec{a}-\vec{b}(a_1-b_1,a_2-b_2)
+		\end{equation*}
+	\end{theorem}
+	\begin{theorem}[Szorzás skalárral]
+		\begin{equation*}
+			\lambda\vec{a}(\lambda a_1,\lambda a_2)
+		\end{equation*}
+	\end{theorem}
+	\begin{theorem}[Ellentett]
+		\begin{equation*}
+			-\vec{a}(-a_1,-a_2)
+		\end{equation*}
+	\end{theorem}
+	\begin{theorem}
+		Ha egy vektort 90\degree-kal elforgatunk, koordinátái felcserélődnek és az egyik előjelet vált:
+		\begin{itemize}
+			\item +90\degree: $\vec{a'}(-a_2,a_1)$
+			\item -90\degree: $\vec{a''}(a_2,-a_1)$
+		\end{itemize}
+	\end{theorem}
+\section{Skaláris szorzat}
+	\begin{definition}
+		Egyállású vektorok szöge 0\degree, ha egyirányúak, egyébként 180\degree. Nem egyállású vektorok esetén a vektorok hajlásszögén a közös pontból kiinduló vektorok félegyenesei által bezárt konvex szöget értjük.
+	\end{definition}
+	\begin{definition}
+		Két vektor skaláris szorzata a két vektor abszolút értékének és hajlásszögük koszinuszának szorzata: $\vec{a}\centerdot\vec{b}=|\vec{a}|\centerdot|\vec{b}|*\cos\alpha$.
+	\end{definition}
+	\begin{outline}
+		\1 Tulajdonságok
+			\2 Kommutatív: $\vec{a}\centerdot\vec{b}=\vec{b}\centerdot\vec{a}$
+			\2 Disztributív:
+			\begin{align*}
+				\lambda*(\vec{a}\centerdot\vec{b})&=(\lambda*\vec{a})\centerdot\vec{b}=\vec{a}\centerdot(\lambda*\vec{b})\\
+				(\vec{a}+\vec{b})\centerdot\vec{c}&=\vec{a}\centerdot\vec{c}+\vec{b}\centerdot\vec{c}
+			\end{align*}
+	\end{outline}
+	\begin{theorem}
+		Két vektor skaláris szorzata akkor és csak akkor 0, ha a két vektor merőleges egymásra:
+		\begin{equation*}
+			\vec{a}\centerdot\vec{b}=0\Leftrightarrow\vec{a}\perp\vec{b}
+		\end{equation*}
+	\end{theorem}
+	\begin{theorem}
+		Két vektor skaláris szorzata koordinátákkal:
+		\begin{equation*}
+			\vec{a}\centerdot\vec{b}=a_1b_1+a_2b_2
+		\end{equation*}
+	\end{theorem}
+	\begin{proof}
+		\begin{align*}
+			\vec{a}&=a_1\vec{i}+a_2\vec{j}\\
+			\vec{b}&=b_1\vec{i}+b_2\vec{j}\\
+			\vec{a}*\vec{b}&=(a_1\vec{i}+a_2\vec{j})\centerdot(b_1\vec{i}+b_2\vec{j})=a_1b_1\vec{i}^2+a_1b_2\vec{i}\centerdot\vec{j}+a_2b_1\vec{j}\centerdot\vec{i}+a_2b_2\vec{j}^2=\\
+			&=a_1b_1+a_2b_2
+		\end{align*}
+	\end{proof}
+\section{Vektoriális szorzat}
+	\begin{definition}
+		Két $(\vec{a};\vec{b})$ vektor vektoriális szorzata a térben egy olyan vektor, amely hossza megegyezik a két vektor hosszának, és hajlásszögük szinuszának szorzatával, iránya pedig olyan, hogy $\vec{a},\ \vec{b},\ \vec{a}\times\vec{b}$ jobbrendszert alkot. Jele:
+		\begin{equation*}
+			|\vec{a}\times\vec{b}|=|\vec{a}|*|\vec{b}|*\sin\alpha
+		\end{equation*}
+	\end{definition}
+	\begin{outline}
+		\1 Tulajdonságok
+			\2 Nem kommutatív: $\vec{a}\times\vec{b}=-(\vec{b}\times\vec{a})$
+			\2 Nem asszociatív: $\vec{a}\times(\vec{b}\times\vec{c})\ne (\vec{a}\times\vec{b})\times\vec{c}$
+			\2 Disztributív:
+			\begin{align*}
+				\lambda*(\vec{a}\times\vec{b})&=(\lambda*\vec{a})\times\vec{b}=\vec{a}\times(\lambda*\vec{b})\\
+				(\vec{a}+\vec{b})\times\vec{c}&=\vec{a}\times\vec{c}+\vec{b}\times\vec{c}
+			\end{align*}
+	\end{outline}
+	\begin{theorem}
+		Két vektor vektoriális szorzata akkor és csak akkor nulla, ha egyállásúak:
+		\begin{equation*}
+			\vec{a}\times\vec{b}=0\Leftrightarrow\vec{a}\|\vec{b}
+		\end{equation*}
+	\end{theorem}
+	\begin{theorem}
+		Két vektor vektoriális szorzata megegyezik a következő mátrix determinánsával:
+		\begin{equation*}
+			\vec{a}\times\vec{b}=\det
+			\begin{pmatrix}
+				\vec{i}&\vec{j}&\vec{k}\\
+				a_1&a_2&a_3\\
+				b_1&b_2&b_3
+			\end{pmatrix}
+		\end{equation*}
+	\end{theorem}
+	\begin{theorem}
+		Két vektor vektoriális szorzata koordinátáikkal kifejezve:
+		\begin{equation*}
+			\vec{a}\times\vec{b}=\vec{i}(a_2b_3-a_3b_2)-\vec{j}(a_1b_3-a_3b_1)+\vec{k}(a_1b_2-a_2b_1)
+		\end{equation*}
+	\end{theorem}
+\chapter{Szakaszok és egyenesek}
+\section{Szakaszok a koordinátasíkon}
+	\begin{theorem}
+		A síkbeli derékszögű koordinátarendszerben az $A(a_1,a_2)$ és $B(b_1,b_2)$ végpontokkal meghatározott szakasz hossza az $\overrightarrow{AB}$ hossza: $|\overrightarrow{AB}|=\sqrt{(b_1-a_1)^2+(b_2-a_2)^2}$, ami egyben $A$ és $B$ pontok távolsága.
+	\end{theorem}
+	\begin{theorem}
+		Szakasz felezőpontjának koordinátái: $F\left(\frac{a_1+b_1}{2};\frac{a_2+b_2}{2}\right)$.
+	\end{theorem}
+	\begin{theorem}
+		Szakasz harmadolópontjainak koordinátái:
+		\begin{align*}
+			H_1&\left(\frac{2a_1+b_1}{3};\frac{2a_2+b_2}{3}\right)\\
+			H_2&\left(\frac{a_1+2b_1}{3};\frac{a_2+2b_2}{3}\right)
+		\end{align*}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.8\linewidth]{Harmad}
+		\end{figure}
+	\end{theorem}
+	\begin{theorem}
+		Az $AB$ szakaszt $p:q$ arányban osztó pont koordinátái: $R\left(\frac{qa_1+pb_1}{p+q};\frac{qa_2+pb_2}{p+g}\right)$
+	\end{theorem}
+\section{Egyenest meghatározó adatok}
+	Egy egyenest egyértelműen meghatároz 2 pontja, vagy 1 pontja, és 1, az állását jellemző adata. Ilyen adat például az irányvektora, normálvektora, irányszöge, iránytangense.
+	\begin{definition}
+		Az egyenes irányvektora az egyenessel párhuzamos, nullvektortól különböző vektor. Jele: $\vec{v}(v_1;v_2)$.
+	\end{definition}
+	\begin{definition}
+		Az egyenes normálvektora az egyenesre merőleges, nullvektortól különböző vektor. Jele: $\vec{n}(A;B)$.
+	\end{definition}
+	\begin{definition}
+		Az egyenes irányszöge az a $-\frac{\pi}{2}<\alpha\le\frac{\pi}{2}$ szög, amelyet az egyenes az $x$ tengely pozitív irányával bezár.
+	\end{definition}
+	\begin{definition}
+		Az egyenes irányszögének tangensét (ha létezik) az egyenes iránytangensének nevezzük. Jele: $m=\text{tg}\alpha$. Az $\alpha=90\degree$-os irányszögű egyenesnek nincs iránytangense.
+	\end{definition}
+	\begin{outline}
+		\1 Összefüggések
+			\2 $\vec{v}(v_1;v_2)$ irányvektor $\implies \vec{n}(-v_2;v_1)\vee\vec{n}(v_2;-v_1)$ normálvektor, $m=\frac{v_2}{v_1}=\text{tg}\alpha\ (v_1\ne0)$
+			\2 $\vec{n}(A;B)$ normálvektor $\implies\vec{v}{-B;A}\vee\vec{v}(B;-A)$ irányvektor, $m=-\frac{A}{B}=\text{tg}\alpha\ (B\ne0)$
+			\2 Iránytangens $m\implies$ irányszög: $\alpha=\text{arctg}\ m$, irányvektor: $\vec{v}(1;m)$, normálvektor: $\vec{n}(-m;1)\vee\vec{n}(m;-1)$
+			\2 Irányszög $\alpha\implies$ iránytangens: $m=\text{tg}\alpha\implies$ irányvektor: $\vec{v}(1;\text{tg}\alpha)$, normálvektor: $\vec{n}(-\text{tg}\alpha;1)\vee\vec{n}(\text{tg}\alpha;-1)$. Ha $\alpha=90\degree$, akkor $m$ nem létezik, $\vec{v}(0;1)$, és $\vec{n}(1;0)$.
+			\2 Egyenes két különböző pontja $A(a_1;a_2)$ és $B(b_1;b_2)$, akkor:
+				\3 Irányvektor: $\overrightarrow{AB}=\vec{v}(b_1-a_1;b_2-a_2)$
+				\3 Normálvektor: $\vec{n}(a_2-b_2;b_1-a_1)\vee\vec{n}(b_2-a_2;a_1-b_1)$
+				\3 Iránytangens: $m=\frac{b_2-a_2}{b_1-a_1}$
+				\3 Irányszög: $\alpha=\text{arctg}\ m$
+	\end{outline}
+\section{Egyenes egyenletei}
+	\begin{definition}
+		Egy alakzat egyenletén, a síkbeli $xy$ koordináta-rendszerben, olyan egyenletet értünk,
+		melyet az alakzat pontjainak koordinátái kielégítenek, de más síkbeli pontok nem.
+	\end{definition}
+	\begin{theorem}
+		Ha egy egyenesnek adott a $P_0(x_0;y_0)$ pontja, és egy $\vec{n}(A;B)$ normálvektora, akkor az egyenes normálvektoros egyenlete: $Ax+By=Ax_0+By_0$.
+	\end{theorem}
+	\begin{proof}
+		Egy $P(x;y)$ pont akkor és csak akkor van rajta az $e$ egyenesen, ha a $\overrightarrow{P_0P}$ vektor merőleges az egyenes $\vec{n}(A;B)$ normálvektorára. Jelölje $P_0$ pont helyvektorát $\vec{r_0}$, a $P$ pont helyvektorát $\vec{r}$, akkor $\overrightarrow{P_0P}=\vec{r}-\vec{r_0}$, koordinátákkal: $\overrightarrow{P_0P}=(x-x_0;y-y_0)$. $\overrightarrow{P_0P}$ akkor és csak akkor merőleges az egyenes normálvektorára, ha $\overrightarrow{P_0P}\centerdot\vec{n}$=0, azaz: $(x-x_0)*A+(y-y_0)*B=0$, átrendezve:
+		\begin{equation*}
+			Ax+By=Ax_0+By_0
+		\end{equation*}
+	\end{proof}
+	\begin{theorem}
+		Ha egy egyenesnek adott a $P_0(x_0;y_0)$ pontja és egy $\vec{v}(v_1;v_2)$ irányvektora, akkor az egyenes irányvektoros egyenlete: $v_2x-v_1y=v_2x_0-v_1y_0$
+	\end{theorem}
+	\begin{theorem}
+		Ha adott az $y$ tengellyel nem párhuzamos egyenes egy $P_0(x_0;y_0)$ pontja és $m$ iránytangense, akkor iránytényezős egyenlete: $y-y_0=m*(x-x_0)$
+	\end{theorem}
+	\begin{theorem}
+		Az $y$ tengellyel párhuzamos, $P_0(x_0;y_0)$ ponton átmenő egyenes egyenlete: $x=x_0$
+	\end{theorem}
+	\begin{definition}
+		Két egyenes metszéspontja egy olyan pont, amely illeszkedik mindkét egyenesre
+	\end{definition}
+	\begin{definition}
+		Két egyenes hajlásszöge irányvektoraik, vagy normálvektoraik szöge.
+	\end{definition}
+\section{Két egyenes merőlegessége és párhuzamossága}
+	Legyen két egyenes $e$ és $f$, irányvektoraik $\vec{v}_e$ és $\vec{v}_f$, normálvektoraik $\vec{n}_e$ és $\vec{n}_f$, irányszögeik $\alpha_e$ és $\alpha_f$, iránytangenseik $m_e$ és $m_f$, ha léteznek.
+	\begin{outline}
+		\1 $e\|f\Leftrightarrow$
+			\2[] $\vec{v_e}\|\vec{v_f},\text{ azaz }\exists\lambda\in\mathbb{R}\setminus\{0\}\ \vec{v_e}=\lambda*\vec{v_f}$
+			\2[] $\vec{n_e}\|\vec{n_f},$ azaz $\exists\lambda\in\mathbb{R}\setminus\{0\}\ \vec{n_e}=\lambda*\vec{v_f}$
+			\2[] $\alpha_e=\alpha_f$
+			\2[] $m_e=m_f$
+		\1 $e\perp f\Leftrightarrow$
+			\2[] $\vec{v_e}\perp \vec{v_f},$ azaz $\vec{v_e}\centerdot\vec{v_f}=0$
+			\2[] $\vec{n_e}\perp \vec{n_f},$ azaz $\vec{n_e}\centerdot\vec{n_f}=0$
+			\2[] $\vec{n_e}=\lambda*\vec{v_f}\ (\lambda\ne0)$
+			\2[] $\vec{v_e}=\lambda*\vec{n_f}\ (\lambda\ne0)$
+			\2[] $m_e*m_f=-1$
+	\end{outline}
+\section{Elsőfokú egyenlőtlenségek}
+	\begin{definition}
+		Elsőfokú egyismeretlenes egyenlőtlenség: $ax+b>0 (a\ne0)$
+	\end{definition}
+	\begin{equation*}
+		\begin{cases*}
+			a>0,& akkor $x>-\frac{b}{a}$\\
+			a<0,& akkor $x<-\frac{b}{a}$
+		\end{cases*}
+	\end{equation*}
+	Ha megengedett az egyenlőtlenség, akkor megengedett a megoldásban is.
+	\begin{definition}
+		Elsőfokú kétismeretlenes egyenlőtlenség: $ax+by+c>0 (a\ne0)$
+	\end{definition}
+	\begin{equation*}
+		\begin{cases*}
+			b>0,& akkor $y>-\frac{a}{b}x-\frac{c}{b}$\\
+			b<0,& akkor $y<-\frac{a}{b}x-\frac{c}{b}$\\
+			b=0,& akkor $ax+c>0$ egyismeretlenes egyenlőtlenség
+		\end{cases*}
+	\end{equation*}
+\chapter{Kör és parabola}
+\section{Kör és egyenlete}
+	\begin{definition}
+		A kör azon pontok halmaza a síkon, amelyek egy adott ponttól adott távolságra vannak.
+		Az adott pontot a kör középpontjának, az adott távolságot a kör sugarának nevezzük.
+	\end{definition}
+	\begin{theorem}
+		A $C(u;v)$ középpontú $r$ sugarú kör egyenlete $(x-u)^2+(y-v)^2=r^2$
+	\end{theorem}
+	A kör egyenlete kétismeretlenes másodfokú egyenlet, mivel átalakítható: $x^2+y^2-2ux-2vy+u^2+v^2-r^2=0$, azaz
+	\begin{equation*}
+		x^2+y^2+Ax+By+C=0
+	\end{equation*}
+	alakra hozható, ahol $A;B;C\in\mathbb{R}\wedge A^2+B^2-4C>0$. Ekkor a kör középpontjának koordinátáira:
+	\begin{align*}
+		A&=-2u\implies u=-\frac{A}{2}\\
+		B&=-2v\implies v=-\frac{B}{2}
+	\end{align*}
+	Illetve:
+	\begin{align*}
+		u^2+v^2-r^2=C&\implies r^2=u^2+v^2-C\implies r^2=\frac{A^2+B^2-4C}{4}\implies \\&\implies r=\frac{\sqrt{A^2+B^2-4C}}{2}
+	\end{align*}
+\section{Parabola és egyenletei}
+	\begin{definition}
+		A parabola azon pontok halmaza a síkon, amelyek a sík egy $v$ egyenesétől és az egyenesre
+		nem illeszkedő $F$ ponttól egyenlő távolságra vannak. Az egyenes a parabola direktrixe (vezéregyenese), a pont a parabola fókuszpontja.
+	\end{definition}
+	A direktrix és a fókuszpont távolsága a parabola paramétere ($p>0$). A fókuszpontra illeszkedő, a direktrixre merőleges egyenes a parabola szimmetriatengelye, vagy tengelye (t). A parabola tengelyen lévő pontja a parabola tengelypontja (T). A tengelypont felezi a fókuszpont és a direktrix távolságát.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.4\linewidth]{Par}
+	\end{figure}
+	\begin{theorem}
+		Az $F\left(0;\frac{p}{2}\right)$ fókuszpontú $y=-\frac{p}{2}$ direktrixű parabola egyenlete: $y=\frac{1}{2p}x^2$.
+	\end{theorem}
+	\begin{proof}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.4\linewidth]{ParBiz}
+		\end{figure}
+		A $P(x;y)$ pont és a direktrix távolsága a $PQ$ távolság, ahol $Q$ P merőleges vetülete a direktrixen, ezért $Q\left(x;-\frac{p}{2}\right)$.
+		\begin{equation*}
+			\begin{rcases*}
+				PQ=\sqrt{(x-x)^2+\left(y+\frac{p}{2}\right)^2}=\sqrt{\left(y+\frac{p}{2}\right)^2}\\
+				PF=\sqrt{(x-0)^2+\left(y-\frac{p}{2}\right)^2}=\sqrt{x^2+\left(y-\frac{p}{2}\right)^2}
+			\end{rcases*}
+			PQ=PF
+		\end{equation*}
+		\begin{align*}
+			\sqrt{\left(y+\frac{p}{2}\right)^2}&=\sqrt{x^2+\left(y-\frac{p}{2}\right)^2}\tag{Mivel mindkét oldal nemnegatív, a négyzetre emelés ekvivalens átalakítás}\\
+			y^2+py+\frac{p^2}{4}&=x^2+y^2-py+\frac{p^2}{4}\\
+			y&=\frac{1}{2p}x^2
+		\end{align*}
+	\end{proof}
+	\begin{theorem}
+		$p$ paraméterű $T(u;v)$ tengelypontú parabolák egyenletei, és jellemzőik:
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.8\linewidth]{ParEgy}
+		\end{figure}
+	\end{theorem}
+	Minden másodfokú függvény grafikonja az y tengellyel párhuzamos tengelyű parabola, és minden y tengellyel párhuzamos tengelyű parabola valamelyik másodfokú függvény grafikonja.
+	\begin{theorem}
+		Parabola egyenlete általános esetben, ha a direktrix: $ax+by+c=0$, fókuszpont: $F(f_1;f_2)$:
+		\begin{equation*}
+		\frac{(ax+by+c)^2}{a^2+b^2}=(x-f_1)^2+(y-f_2)^2
+		\end{equation*}
+	\end{theorem}
+\section{Kör és egyenes kölcsönös helyzete}
+	Egy síkban egy körnek és egy egyenesnek háromféle helyzete lehet: nincs közös pontjuk, egy közös pontjuk van (az egyenes érinti a kört), két közös pontjuk van (az egyenes metszi a kört).
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{KörEgy}
+	\end{figure}
+	\begin{outline}
+		\1 Közös pontok meghatározása: egyenleteikből álló egyenletrendszerből
+			\2 Egyenes egyenletből egyik ismeretlen kifejezése
+			\2 Kör egyenletébe helyettesítés -> másodfokú egyismeretlenes egyenlet
+			\2 Diszkrimináns adja meg közös pontok számát
+	\end{outline}
+\section{Parabola és egyenes kölcsönös helyzete}
+	Közös pontok száma lehet 2, 1, 0.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{ParEgye}
+	\end{figure}
+	\begin{definition}
+		A parabola érintője olyan egyenes, melynek egy közös pontja van a parabolával és
+		nem párhuzamos a parabola tengelyével.
+	\end{definition}
+	\begin{outline}
+		\1 Érintő meghatározása
+			\2 Egyenes egyenletét $m$ meredekséggel felírva
+				\3 $m$ ne tengellyel párhuzamos egyenesre utaljon
+			\2 Egyenletrendszernek egy megoldása van
+			\2 Parabola egyenletéből egyenes egyenletébe helyettesítés
+				\3 Másodfokú egyenlet diszkriminánsa 0
+		\1 Deriválás
+			\2 Y tengellyel párhuzamos: másodfokú függvény deriváltja egyenes meredeksége
+			\2 Általános eset: implicit deriválás, $y'$-ra rendezés adja az egyenes meredekségét
+	\end{outline}
+\section{Másodfokú egyenlőtlenségek}
+	\begin{definition}
+		Egyenlőtlenség algebrai kifejezések a $<,>,\le,\ge$ jelek valamelyikével való összekapcsolása. Ha a kifejezések másodfokúak, másodfokú egyenlőtlenségről beszélünk.
+	\end{definition}
+	\begin{outline}
+		\1 Megoldási módszerek hasonlóak az egyenlethez
+			\2 Mérlegelv: Negatív értékkel való szorzás/osztásnál irány fordul
+			\2 Reciprok: Ha mindkét oldal negatív irány fordul
+			\2 Grafikus megoldás:
+				\3 Másodfokú kifejezések grafikonja parabola
+				\3 0-ra rendezés, $a>0$
+				\3 Bal oldali kifejezés ábrázolása
+				\3 Zérushelyek megállapítása
+				\3 2 zérushely
+				\begin{figure}[H]
+					\centering
+					\begin{tabular}{cc}
+						\includegraphics[width=0.5\linewidth]{2}&
+						\includegraphics[width=0.5\linewidth]{1}\\
+						\multicolumn{2}{c}{\includegraphics[width=0.5\linewidth]{0}}
+					\end{tabular}
+				\end{figure}
+	\end{outline}
+\chapter{Térgeometria}
+\section{Térelemek}
+	Pont, egyenes, sík alapfogalmak, nem definiáljuk őket.
+	\begin{definition}
+		Két térelem illeszkedő, ha egyik részhalmaza a másiknak
+	\end{definition}
+	\begin{definition}
+		Két egyenes párhuzamos, ha egy síkban vannak és nem metszik egymást.
+	\end{definition}
+	\begin{definition}
+		Egyenes és sík, illetve 2 sík párhuzamos, ha nincs közös pontjuk.
+	\end{definition}
+	\begin{definition}
+		Egy síkban két, azonos pontból kiinduló félegyenest és az általuk meghatározott bármelyik síkrészt szögnek nevezzük. A közös kezdőpont a szög csúcspontja, a két félegyenes a szög szárai, a síkrész a szögtartomány.
+	\end{definition}
+	\begin{definition}
+		Illeszkedő vagy párhuzamos térelemek szöge 0\degree
+	\end{definition}
+	\begin{definition}
+		Két metsző egyenes 4 szöget alkot, ezek közül 2-2 egyenlő. Ha a két egyenes nem merőleges egymásra, akkor a két egyenes hajlásszöge a kétfajta szög közül a kisebbik. Ha a két egyenes merőleges egymásra, akkor a hajlásszögük derékszög.
+	\end{definition}
+	\begin{definition}
+		Két egyenes kitérő, ha nincsenek egy síkban.
+	\end{definition}
+	\begin{definition}
+		Két kitérő egyenes hajlásszöge egyenlő a tér egy tetszőleges pontján átmenő és az adott egyenesekkel párhuzamos egyenesek hajlásszögével.
+	\end{definition}
+	\begin{theorem}
+		Egy, a síkot metsző egyenes merőleges a síkra, ha merőleges a sík minden egyenesére.
+	\end{theorem}
+	\begin{definition}
+		Ha az $e$ egyenes nem merőleges a síkra, akkor az egyenes merőleges vetülete a síkon
+		szintén egyenes $(e')$. Ebben az esetben az egyenes és a sík hajlásszögén az egyenes és a vetülete hajlásszögét értjük.
+	\end{definition}
+	\begin{definition}
+		Ha két sík nem párhuzamos egymással, akkor metszésvonaluk egy pontjában mindkét síkban merőlegest állítunk a metszésvonalra. A két sík hajlásszöge e két egyenes hajlásszögével egyenlő.
+	\end{definition}
+	\begin{definition}
+		Két illeszkedő, vagy metsző térelem távolsága 0.
+	\end{definition}
+	\begin{definition}
+		Két pont távolsága a pontokat összekötő szakasz hossza.
+	\end{definition}
+	\begin{definition}
+		Pont és egyenes távolsága a pontból az egyenesre bocsátott merőleges szakasz hossza.
+	\end{definition}
+	\begin{definition}
+		Pont és sík távolsága a pontból a síkra bocsátott merőleges szakasz hossza.
+	\end{definition}
+	\begin{definition}
+		Párhuzamos egyenesek távolsága: bármelyik egyenes egy tetszőleges pontjának távolsága
+		a másik egyenestől.
+	\end{definition}
+	\begin{definition}
+		Két kitérő egyenes távolsága az őket összekötő, mindkettőre merőleges szakasz hossza. Normáltranszverzális az az egyenes, amely mindkét kitérő egyenesre merőleges
+	\end{definition}
+	\begin{definition}
+		Egyenes és vele párhuzamos sík távolsága az egyenes egy tetszőleges pontjának
+		a síktól való távolságával egyenlő.
+	\end{definition}
+	\begin{definition}
+		Két párhuzamos sík távolsága az egyik sík egy tetszőleges pontjának a másik síktól vett
+		távolsága.
+	\end{definition}
+\section{Térbeli alakzatok}
+	\begin{definition}
+		A térnek véges felületekkel határolt részét testnek nevezzük.
+	\end{definition}
+	\begin{definition}
+		A sokszöglapokkal határolt testek a poliéderek.
+	\end{definition}
+	\begin{definition}
+		A szabályos testek olyan poliéderek, amelynek lapjai egybevágó szabályos sokszögek,
+		valamennyi lapszögük és élszögük egyenlő.
+	\end{definition}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{SzabPoli}
+	\end{figure}
+	\begin{definition}[Hengerszerű testek]
+		Egy síkidom kerületén levő pontokon keresztül párhuzamosokat húzunk egy, a síkidom síkjával nem párhuzamos egyenessel. Az így kapott palástfelületet az eredeti síkidom síkjával és egy vele párhuzamos síkkal elmetszünk. Ha a test alaplapja sokszög, akkor hasábnak, ha kör, hengernek nevezzük. Ha a párhuzamos egyenesek merőlegesek az alaplap síkjára, akkor a testet egyenes hengerszerű testnek, különben ferde hengerszerű testnek nevezzük.
+	\end{definition}
+	\begin{definition}[Kúpszerű testek]
+		Egy síkidom kerületén levő pontokon keresztül egyeneseket húzunk egy, a síkidom síkjára nem illeszkedő ponton keresztül. Ha a test alaplapja sokszög, akkor gúlának, ha kör, kúpnak nevezzük. Ha a kúp minden alkotója (az egyenesek az adott pont és a síkidom közti szakasza) egyenlő hosszú, akkor egyenes kúpszerű testnek, különben ferde kúpszerű testnek nevezzük.
+	\end{definition}
+	\begin{definition}[Csonkakúpszerű testek]
+		Ha egy kúpszerű testet az alaplapjával párhuzamos síkkal elmetszünk, akkor a két párhuzamos sík közti testet csonkakúpszerű testnek nevezzük. Ha a test alaplapja sokszög, akkor csonkagúlának, ha kör, csonkakúpnak nevezzük.
+	\end{definition}
+	\begin{definition}[Gömbfelület]
+		Egy adott ponttól egyenlő távolságra levő pontok halmaza a térben. Gömböt kapunk, ha egy kört valamelyik átmérője mentén megforgatunk.
+	\end{definition}
+\section{Testek felszíne}
+	A felszín jele: $A$. Poliéderek felszíne a poliédert határoló véges számú sokszöglap területének az összege. Egyébként:
+	\begin{itemize}
+		\item Ha a test felülete síkba kiteríthető, akkor ennek a kiterített felületnek a területe adja a test felszínét (pl. henger, kúp).
+		\item Ha csak egy olyan pozitív valós szám van, amely a test által tartalmazott poliéderek felszínénél nem kisebb, és a testet tartalmazó poliéderek felszínénél nem nagyobb, akkor az a test felszíne.
+	\end{itemize}
+	\begin{theorem}[Forgástest]
+		Ha az $f(x)$ függvény az $[a;b]$ intervallumon folytonos és $f(x)\ge0$, akkor az $f(x)$ függvény grafikonjának az $x$ tengely körüli megforgatásával keletkezett forgástest palástjának felszíne:
+		\begin{equation*}
+			A=2\pi\int_{a}^{b}f(x)*\sqrt{1+\left(f'(x)\right)^2}
+		\end{equation*}
+		A teljes forgástest felszíne megegyezik a palást felszínének, és a fedő- illetve alaplap területének összegével.
+	\end{theorem}
+	\begin{theorem}
+		Hasonló testek felszínének aránya megegyezik a hasonlóság arányának négyzetével.
+	\end{theorem}
+\section{Testek térfogata}
+	A térfogat jele: $V$. Poliéder térfogata poliéderre jellemző pozitív szám, amely axiómái a következők:
+	\begin{itemize}
+		\item Egységkocka térfogata 1
+		\item Egybevágó poliéderek térfogata egyenlő
+		\item Egy részpoliéderekre szétvágott poliéder térfogata egyenlő a részek térfogatának összegével
+	\end{itemize}
+	Poliéderektől különböző testeknél ha egyetlen olyan pozitív valós szám van, amely a test által tartalmazott poliéderek térfogatánál nem kisebb, és a testet tartalmazó poliéderek térfogatánál nem nagyobb, akkor ezt a számot a test térfogatának nevezzük.
+	\begin{theorem}[Forgástest]
+		Ha az $f(x)$ függvény az $[a;b]$ intervallumon folytonos és $f(x)\ge0$, akkor az $f(x)$ függvény grafikonjának az $x$ tengely körüli megforgatásával keletkezett forgástest térfogata:
+		\begin{equation*}
+			V=\pi\int_{a}^{b}f^2(x)dx
+		\end{equation*}
+	\end{theorem}
+	\begin{theorem}
+		Az $r$ sugarú gömb térfogata: $V=\frac{4}{3}r^3\pi$
+	\end{theorem}
+	\begin{proof}
+		A gömb egy félkör átmérő körüli megforgatása, ezért térfogata, mivel az $r$ sugarú kör egyenletéből $y^2=\sqrt{r^2-x^2}$:
+		\begin{align*}
+		V&=\pi\int_{-r}^{r}\left(r^2-x^2\right)dx=\pi*\left[r^2x-\frac{x^3}{3}\right]^r_{-r}=\pi*
+		\left(r^3-\frac{r^3}{3}-\left(-r^3+\frac{-r^3}{3}\right)\right)=\\
+		&=\pi*\left(2r^3-\frac{2r^3}{3}\right)=\pi*\frac{4r^3}{3}
+		\end{align*}
+	\end{proof}
+	\begin{theorem}
+		Hasonló testek térfogatának aránya megegyezik a hasonlóság arányának köbével.
+	\end{theorem}
+\section{Testek felszíne és térfogata}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=.8\linewidth]{Test1}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=.8\linewidth]{Test2}
+		\includegraphics[width=.8\linewidth]{Test3}
+	\end{figure}
+	\begin{theorem}
+		Egy $r$ sugarú, $a$ alkotójú kúp felszíne $A=r\pi(r+a)$
+	\end{theorem}
+\chapter{Terület}
+\section{Területszámítás}
+	\begin{definition}
+		A terület minden síkidomhoz rendelt pozitív valós szám, amelynek axiómái:
+		\begin{itemize}
+			\item Egységnyi oldalhosszúságú négyzet területe egységnyi
+			\item Egybevágó síkidomok területe egyenlő
+			\item Ha egy síkidomot véges számú síkidomra darabolunk, akkor az egyes részek területének összege egyenlő az eredeti sokszög területével
+		\end{itemize}
+	\end{definition}
+\section{Síkidomok területe}
+	\begin{theorem}
+		Téglalap területe két szomszédos oldalának szorzatával egyenlő: $T=a*b$
+	\end{theorem}
+	\begin{theorem}
+		Paralelogramma területe: $T=a*m_a$
+	\end{theorem}
+	\begin{theorem}
+		Háromszög területe: 
+		\begin{equation*}
+		T=\frac{a*m_a}{2}=\frac{a*b*\sin\gamma}{2}=r*s=\frac{a*b*c}{4R}=\sqrt{s(s-a)(s-b)(s-c)}
+		\end{equation*}
+		Ahol $r$ beírt kör sugara, $R$ körülírt kör sugara, $s$ a félkerület.
+	\end{theorem}
+	\begin{theorem}
+		A trapéz területe az alapok számtani közepének és a trapéz magasságának szorzata:
+		\begin{equation*}
+			T=\frac{a+c}{2}*M
+		\end{equation*}
+	\end{theorem}
+	\begin{theorem}
+		Bármely sokszög véges számú háromszögre darabolható, területe megegyezik ezeknek a háromszögeknek a területösszegével.
+	\end{theorem}
+	\begin{theorem}
+		Négyszög területe az átlói hossza és az átlók által bezárt szög szinuszának a szorzatának a fele:
+		\begin{equation*}
+			T=\frac{e*f*\sin\varphi}{2}
+		\end{equation*}
+	\end{theorem}
+	\begin{theorem}
+		Deltoid területe átlói szorzatának a fele.
+	\end{theorem}
+	\begin{theorem}
+		Szabályos n-szög területe:
+		\begin{equation*}
+			T=n*\frac{a*r}{2}=n*\frac{R^2*\sin\frac{360\degree}{n}}{2}
+		\end{equation*}
+		Ahol $r$ a beírt kör sugara, $R$ a körülírt kör sugara.
+	\end{theorem}
+	\begin{theorem}
+		$r$ sugarú kör területe: $r^2\pi$.
+	\end{theorem}
+\section{Határozott integrál}
+	\begin{definition}
+		Görbe alatti terület egy $[a;b]$ intervallumon folytonos, korlátos, pozitív értékű $f$ függvény görbéjének az intervallumhoz tartozó íve, az $x=a$, az $x=b$ egyenesek és az $x$ tengely által határolt terület.
+	\end{definition}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=.3\linewidth]{GörT}
+	\end{figure}
+	\begin{definition}
+		Ha az $[a;b]$ intervallumot az $a=x_0,x_1,\dots,x_n=b$ pontokkal $n$ részre osztjuk, akkor ezt az intervallum egy felosztásának nevezzük.
+	\end{definition}
+	\begin{outline}
+		\1 Felosztás intervalluma: $[x_{i-1};x_i]$. 
+			\2 $m_i=\inf f(x),$ ha $x\in[x_{i-1};x_i]$
+			\2 $M_i=\sup f(x),$ ha $x\in[x_{i-1};x_i]$
+			\2 Intervallum fölé téglalapok, másik oldaluk $m_i$, $M_i$
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=.3\linewidth]{Tégl}
+			\end{figure}
+			\2 Felosztás minden intervallumához
+			\2 Kisebb/nagyobb téglalapok -> sokszög
+			\2 Beírt/körülírt sokszög
+			\2 Beírt sokszög területe: alsó közelítő összeg:
+			\begin{equation*}
+				s_n=\sum_{i=1}^{n} m_i*(x_i-x_{i-1})
+			\end{equation*}
+			\2 Körülírt sokszög területe: felső közelítő összeg:
+			\begin{equation*}
+				S_n=\sum_{i=1}^n M_i*(x_i-x_{i-1})
+			\end{equation*}
+			\2 Felosztás finomítása: további osztópontok
+	\end{outline}
+	\begin{definition}
+		Az $[a;b]$ intervallumon korlátos $f$ függvény integrálható, ha bármely minden határon túl finomodó felosztássorozatnak közös határértéke van, azaz $\lim\limits_{n\to\infty} s_n=\lim\limits_{n\to\infty}S_n$. Ez a közös határérték az $f$ függvény $[a;b]$ intervallumon vett határozott integrálja. Jelölés:
+		\begin{equation*}
+			\int_{a}^{b}f(x)dx
+		\end{equation*}
+	\end{definition}
+	\begin{theorem}
+		Ha $f$ integrálható, akkor:
+		\begin{enumerate}
+			\item $\int_{b}^{a}f(x)dx=-\int_{a}^{b}f(x)dx$
+			\item $\int_{a}^{a}f(x)dx=0$
+			\item $\int_{a}^{b}k*f(x)dx=k\int_{a}^{b}f(x)dx$
+			\item $\int_{a}^{b}(f(x)\pm g(x))dx=-\int_{a}^{b}f(x)dx\pm\int_{a}^{b}g(x)dx$
+			\item $\int_{a}^{b}f(x)dx+\int_{b}^{c}f(x)dx=\int_{a}^{c}f(x)dx$
+			\item $\min f(x)*(b-a)\le\int_{a}^{b}f(x)dx\le\max f(x)*(b-a)$
+			\item $f(x)\ge g(x)$ $[a;b]$-n $\implies\int_{a}^{b}f(x)dx\ge\int_{a}^{b}g(x)dx$
+		\end{enumerate}
+	\end{theorem}
+	\begin{theorem}[Középértéktétel]
+		Ha $f$ folytonos $[a;b]$-n, akkor
+		\begin{equation*}
+			\exists c\in[a;b]\ f(c)=\frac{1}{b-a}\int_{a}^{b}f(x)dx
+		\end{equation*}
+	\end{theorem}
+	\begin{theorem}
+		Ha $f$ folytonos $[a;b]$-n, akkor $F(x)=\int_{a}^{x}f(t)dt$ is folytonos $[a;b]$-n, differenciálható $(a;b)$-n és deriváltja $f(x)$:
+		\begin{equation*}
+			F'(x)=\frac{d}{dx}\int_{a}^{x}f(t)dt=f(x)
+		\end{equation*}
+	\end{theorem}
+	\begin{proof}
+		Alkalmazzuk a derivált definícióját $F(x)$-re:
+		\begin{align*}
+			F'(x)&=\frac{F(x+h)-F(x)}{h}=\frac{\int_{a}^{x+h}f(t)dt-\int_{a}^{x}f(t)dt}{h}=\frac{\int_{x}^{x+h}f(t)dt}{h}=\frac{1}{h}*\int_{x}^{x+h}f(t)dt=\tag{Középértéktétel miatt}\\
+			&=f(c)
+		\end{align*}
+		Mivel $h\to0$, és $c\in[x;x+h]$, $c\to x$. Mivel $f$ folytonos:
+		\begin{equation*}
+			\lim\limits_{h\to0}f(c)=f(x)
+		\end{equation*}
+		Az eddigiekből következik, hogy:
+		\begin{equation*}
+		\frac{dF}{dx}=f(x)
+		\end{equation*}
+	\end{proof}
+	\begin{theorem}[Newton-Leibniz tétel]
+		Ha $f$ folytonos $[a;b]$ minden pontjában, és $F$ $f$ primitív függvénye $[a;b]$-n, akkor:
+		\begin{equation*}
+			\int_{a}^{b}f(x)dx=F(b)-F(a)
+		\end{equation*}
+	\end{theorem}
+\section{Görbe alatti terület}
+	\begin{theorem}
+		Ha az $[a;b]$-n folytonos $f$ függvény nem vált előjelet, akkor $x=a,\ x=b,$ az $x$ tengely, és a függvény grafikonja által közrezárt síkidom területe: $T=\left|\int_{a}^{b}f(x)dx\right|$
+	\end{theorem}
+	\begin{theorem}
+		Két függvény által közrezárt síkidom területe:
+		\begin{equation*}
+			T=\int_{a}^{b}(f(x)-g(x))dx\tag{ha $f(x)>g(x)$}
+		\end{equation*}
+	\end{theorem}
+\chapter{Valószínűségszámítás 1.}
+\section{Kombinációk}
+	A kombinatorika, a valószínűség-számítás és a matematikai statisztika a véletlen tömegjelenségek
+	törvényszerűségével foglalkozik. A kombinatorika tárgyát képezik a sorba rendezési és a részhalmaz
+	kiválasztási problémák, a kombinatorika rendszerint dolgok megszámlálásával foglalkozik.
+	\begin{definition}
+		Van $n$ egymástól különböző elemünk. Ha ezekből $k\le n$ db-ot kiválasztunk úgy, hogy az elemek sorrendjére nem vagyunk tekintettel, akkor $n$ elem $k$-ad osztályú ismétlés nélküli kombinációját kapjuk.
+	\end{definition}
+	\begin{theorem}
+		$n$ elem $k$-ad osztályú ismétlés nélküli kombinációinak száma:
+		\begin{equation*}
+			\binom{n}{k}=\frac{n!}{k!*(n-k)!}
+		\end{equation*}
+	\end{theorem}
+	\begin{definition}
+		Ha $n$ különböző elemből kell $k$ elemet kiválasztani úgy, hogy a kiválasztás sorrendje nem számít és a már kiválasztott elemeket újra kiválaszthatjuk, akkor az $n$ elem $k$-ad osztályú ismétléses kombinációját kapjuk.
+	\end{definition}
+	\begin{theorem}
+		$n$ elem $k$-ad osztályú ismétléses kombinációinak száma: $\binom{n+k-1}{k}$
+	\end{theorem}
+\section{Binomiális tétel}
+	\begin{theorem}[Binomiális tétel]
+		\begin{equation*}
+			(a+b)^n=\sum_{k=0}^{n}\binom{n}{k}*a^{n-k}*b^n
+		\end{equation*}
+	\end{theorem}
+	Az $\binom{n}{k}$ együtthatók neve binomiális együttható.
+	\begin{outline}
+		\1 Tulajdonságok
+			\2 $\binom{n}{0}=\binom{n}{n}=1$
+			\2 $\binom{n}{k}=\binom{n}{n-k}$
+	\end{outline}
+	\begin{theorem}
+		\begin{equation*}
+			2^n=\sum_{k=0}^{n}\binom{n}{k}
+		\end{equation*}
+	\end{theorem}
+	\subsection{Pascal háromszög}
+	A háromszögben a sorok számozása nullával kezdődik, a páratlan és a páros sorokban a számok el
+	vannak csúsztatva egymáshoz képest. A nulladik sorban csak egy darab 1-es van. A következő sorokban az új számot úgy kapjuk meg, ha összeadjuk a felette balra és felette jobbra található két számot. Ha az összeg egyik tagja hiányzik, akkor nullának kell tekinteni. Az $n$-edik sor $k$-adik eleme:
+	\begin{equation*}
+		\binom{n}{k}=\binom{n-1}{k-1}+\binom{n-1}{k}
+	\end{equation*}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=.3\linewidth]{Pascal}
+	\end{figure}
+\section{Események}
+	\begin{definition}
+		Véletlen jelenségnek nevezzük azokat a jelenségeket, amelyeket a leírható körülmények
+		nem határoznak meg egyértelműen, például: kockadobás
+	\end{definition}
+	\begin{definition}
+		Kísérletnek nevezzük a véletlen jelenség megfigyelését.
+	\end{definition}
+	\begin{definition}
+		Elemi esemény a kísérlet során bekövetkező lehetséges kimenetelek.
+	\end{definition}
+	\begin{definition}
+		Eseménytér az elemi események halmaza
+	\end{definition}
+	\begin{definition}
+		Az eseménytér részhalmazát eseménynek nevezzük.
+	\end{definition}
+	\begin{definition}
+		Az eseménytérhez tartozó azon esemény, amely biztosan bekövetkezik, a biztos esemény,
+		amely semmiképpen sem következhet be, a lehetetlen esemény. Biztos esemény jele: $H$, lehetetlen esemény jele: $\emptyset$.
+	\end{definition}
+\section{Műveletek eseményekkel}
+	\begin{definition}
+		$A$ esemény komplementere az az esemény, amely akkor következik be, amikor $A$ nem következik be. Jele: $\overline{A}$
+	\end{definition}
+	\begin{definition}
+		$A$ és $B$ események összege az az esemény, amely akkor következik be, amikor $A$ vagy $B$ bekövetkezik. Jele: $A+B$.
+	\end{definition}
+	\begin{definition}
+		$A$ és $B$ események szorzata az az esemény, amely akkor következik be, amikor $A$ és $B$ bekövetkezik. Jele: $A*B$.
+	\end{definition}
+	\begin{definition}
+		$A$ és $B$ események egymást kizárják, ha egyszerre nem következhetnek be.
+	\end{definition}
+\section{A valószínűség-számítás alapjai}
+	\begin{definition}
+		Ha $n$-szer elvégzünk egy kísérletet, és $A$ esemény $k$-szor következik be, akkor az $A$ esemény relatív gyakorisága a $\frac{k}{n}$ hányados.
+	\end{definition}
+	\begin{definition}
+		Ha sokszor elvégzünk egy kísérletet, akkor megfigyelhetjük, hogy egy $A$ esemény
+		relatív gyakorisága egy szám körül ingadozik. Ezt a számot nevezzük az $A$ esemény valószínűségének. Jele: $P(A)$.
+	\end{definition}
+	\begin{definition}
+		A valószínűség kiszámításának klasszikus modelljét akkor alkalmazhatjuk, ha egy kísérletnek véges sok kimenetele van és ezek valószínűsége egyenlő Ekkor az $A$ esemény valószínűsége:
+		\begin{equation*}
+			P(A)=\frac{\text{kedvező elemi események száma}}{\text{összes elemi esemény száma}}
+		\end{equation*}
+	\end{definition}
+	\begin{outline}
+		\1 Axiómák
+			\2 $0\le P(A)\le1$
+			\2 Biztos esemény valószínűsége 1, lehetetlen eseményé 0.
+			\2 Ha $A$ és $B$ egymást kizáró események, akkor $P(A+B)=P(A)+P(B)$
+			\2 $P(A+B)=P(A)+P(B)-P(A*B)$
+			\2 $P(A)+P(\overline{A})=1$
+	\end{outline}
+	\begin{definition}
+		Az $A$ esemény $B$-re vonatkozó feltételes valószínűsége: \\
+		\begin{equation*}
+			P(A|B)=\frac{P(A*B)}{P(B)}
+		\end{equation*}
+	\end{definition}
 	
 \end{document}
