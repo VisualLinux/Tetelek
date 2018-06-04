@@ -248,6 +248,18 @@
 		\item Egyenletek értelmezési tartományának vizsgálatakor számhalmazok metszetét képezzük.
 		\item Koordináta-geometriában a kör, a parabola, az ellipszis és a hiperbola egyenletének felírásakor az adott görbe definícióját használjuk fel.
 	\end{itemize}
+\section{Matematikatörténet}
+	\begin{outline}
+		\1 Cantor (19. század)
+			\2 Halmazok számossága
+				\3 Megegyezik, ha van bijekció
+			\2 $|\mathbb{N}|=\aleph_0$ (megszámlálhatóan végtelen)
+			\2 $|\mathbb{N}|=|\mathbb{Q}|$
+			\2 $|\mathbb{N}|\ne|\mathbb{R}|$ (megszámlálhatatlanul végtelen/kontinuum)
+		\1 Ernst Zermalo, Abraham Fraenkel (20. század)
+			\2 ZF(C) axiomatikus rendszer halmazelméletre Russel paradoxon nélkül
+			\2 C -> Banach-Tarski paradoxon
+	\end{outline}
 \chapter{Racionális és irracionális számok}
 \section{Számhalmazok}
 	\begin{definition}
@@ -376,19 +388,55 @@
 		
 		Pl.: irracionális számok halmaza, számegyenes pontjainak halmaza, intervallum pontjainak halmaza.
 	\end{definition}
+	\begin{definition}
+		$A$ halmaz hatványhalmaza az $A$ összes részhalmazát tartalmazó halmaz. Jele: $P(A)$.
+	\end{definition}
+	\begin{theorem}[Cantor-tétele]
+		$A$ halmaz hatványhalmazának számossága nagyobb $A$ számosságánál: $|A|<|P(A)|$
+	\end{theorem}
+	\begin{theorem}
+		Nem bizonyítható, hogy:
+		\begin{equation*}
+			\exists B\ |A|<|B|<|P(A)|
+		\end{equation*}
+	\end{theorem}
+	\begin{theorem}
+		Nem bizonyítható, hogy:
+		\begin{equation*}
+			\nexists B\ |A|<|B|<|P(A)|
+		\end{equation*}
+	\end{theorem}
 \section{Alkalmazások}
 	\begin{itemize}
 		\item Racionális számok: arányok, arányosság, hasonlóság
 		\item Irracionális számok: szabályos háromszög magassága, négyzet átlója, kör kerülete, területe.
-		\item Kifejezések legbővebb értelmezési tartományának meghatározása.
-		\item Függvény értékkészletének megállapítása
 	\end{itemize}
 \section{Matematikatörténet}
-	\begin{outline}
-		\1 Gauss (XVIII-XIX. század)
-			\2 Komplex számok
-			\2 $\sqrt{-1}=i$
-	\end{outline}
+\begin{outline}
+	\1 Cantor (19. század)
+		\2 Halmazok számossága
+			\3 Megegyezik, ha van bijekció
+		\2 $|\mathbb{N}|=\aleph_0$ (megszámlálhatóan végtelen)
+		\2 $|\mathbb{N}|=|\mathbb{Q}|$
+		\2 $|\mathbb{N}|\ne|\mathbb{R}|$ (megszámlálhatatlanul végtelen/kontinuum)
+	\1 Ernst Zermalo, Abraham Fraenkel (20. század)
+		\2 ZF(C) axiomatikus rendszer halmazelméletre Russel paradoxon nélkül
+		\2 C -> Banach-Tarski paradoxon
+	\1 Gödel (1930-as évek)
+		\2[]
+		\begin{theorem}[Nemteljességi tétel]
+			Minden ellentmondásmentes, a természetes számok elméletét tartalmazó, formális elméletben megfogalmazható olyan állítás, amely az elmélettől független, ha az elmélet által leírható tételek rekurzívan megszámlálható halmazt alkotnak.
+		\end{theorem}
+		\2[] 
+		\begin{definition}
+			Létezik olyan algoritmus, amely kimenete a halmaz elemei. Amennyiben szükséges az algoritmus végtelen ideig futhat.
+		\end{definition}
+	\1 Giuseppe Peano (XIX. század)
+		\2 Axiomatikus rendszer természetes számokra
+	\1 Presburger (XX. század)
+		\2 Formális elmélet természetes számokra csak összeadással, szorzás nélkül
+		\2 Teljes, ellentmondásmentes
+\end{outline}
 \chapter{Oszthatóság}
 \section{Oszthatóság}
 	\begin{definition}
@@ -622,6 +670,31 @@
 		\item Kombinatorika, valószínűségszámítás használja a logikai műveleteket és azok tulajdonságait.
 		\item Egyenletek, egyenlőtlenségek megoldása során sokszor végzünk logikai műveleteket (ekvivalens átalakítások).
 	\end{itemize}
+\section{Matematikatörténet}
+	\begin{outline}
+		\1 Boole (XIX. század)
+			\2 Kijelentések szerkezetének szimbólumokkal, műveletekkel való leírása
+			\2 Boole-algebra
+		\1 de Morgan (XIX. század)
+			\2 De Morgan azonosságok
+		\1 Gödel (1930-as évek)
+			\2[]
+			\begin{theorem}[Nemteljességi tétel]
+				Minden ellentmondásmentes, a természetes számok elméletét tartalmazó, formális elméletben megfogalmazható olyan állítás, amely az elmélettől független, ha az elmélet által leírható tételek rekurzívan megszámlálható halmazt alkotnak.
+			\end{theorem}
+			\2[] 
+			\begin{definition}
+				Létezik olyan algoritmus, amely kimenete a halmaz elemei. Amennyiben szükséges az algoritmus végtelen ideig futhat.
+			\end{definition}
+		\1 Giuseppe Peano (XIX. század)
+			\2 Axiomatikus rendszer természetes számokra
+		\1 Presburger (XX. század)
+			\2 Formális elmélet természetes számokra csak összeadással, szorzás nélkül
+			\2 Teljes, ellentmondásmentes
+		\1 Ernst Zermalo, Abraham Fraenkel (20. század)
+			\2 ZF(C) axiomatikus rendszer halmazelméletre Russel paradoxon nélkül
+			\2 C -> Banach-Tarski paradoxon
+	\end{outline}
 \chapter{Hatványozás, gyökvonás}
 \section{Pozitív egész kitevőjű hatványok}
 	\begin{definition}
@@ -687,6 +760,16 @@
 		Az $a$ pozitív valós szám $\frac{p}{q}$-adik hatványa az a pozitív valós szám, amelynek q-adik hatványa $a^p$, azaz $\left(a^{\frac{p}{q}}\right)^q=a^p$.
 	\end{definition}
 	Ebből következik, hogy $a^\frac{p}{q}=\sqrt[q]{a^p}$
+	\begin{theorem}
+		\begin{equation*}
+			a^{\frac{p}{q}}*a^\frac{m}{n}=a^{\frac{p}{q}+\frac{m}{n}},\quad a>0,\ p;m\in\mathbb{Z},\ q;n\in\mathbb{Z}^+\setminus\{0\}
+		\end{equation*}
+	\end{theorem}
+	\begin{proof}
+		\begin{align*}
+			a^\frac{p}{q}*a^\frac{m}{n}=\sqrt[q]{a^p}*\sqrt[n]{a^m}=\sqrt[q*n]{a^{p*n}*a^{n*q}}=\sqrt[q*n]{a^{p*n+m*q}}=a^\frac{p*n+m*q}{q*n}=a^{\frac{p}{q}+\frac{m}{n}}
+		\end{align*}
+	\end{proof}
 	\begin{definition}
 		Az $a$ pozitív valós szám $\alpha$ irracionális kitevőjű hatványa, $a^\alpha$ a következő határérték: $\lim\limits_{n\rightarrow\infty} a^{r_n}$, ahol {$r_n$} egy olyan számsorozat, mely racionális számokból áll, és $\lim\limits_{n\rightarrow\infty}r_n=\alpha$.
 	\end{definition}
@@ -722,14 +805,6 @@
 	\begin{theorem}
 		$\sqrt{a*b}=\sqrt{a}*\sqrt{b}$, ha a,b nemnegatív valós számok. Szorzat négyzetgyöke egyenlő a tényezők négyzetgyökének szorzatával. Tehát szorzatból tényezőnként vonhatunk gyököt.
 	\end{theorem}
-	\begin{proof}
-		Vizsgáljuk mindkét oldal négyzetét:
-		\begin{align*}
-			\left(\sqrt{a*b}\right)^2&=a*b\\
-			\left(\sqrt{a}*\sqrt{b}\right)^2=\left(\sqrt{a}\right)^2*\left(\sqrt{b}\right)^2&=a*b
-		\end{align*}
-		Ha mindkét oldal értelmes, vagyis $a,b$ nemnegatív, akkor a két oldal négyzetének egyenlőségéből következik a két oldal egyenlősége, mivel $a*b\ge 0\text{, ha } a\ge0\wedge b\ge0$
-	\end{proof}
 	\begin{theorem}
 		$\sqrt{\frac{a}{b}}=\frac{\sqrt{a}}{\sqrt{b}}$, ha a, b nemnegatív valós számok, $b\ne0$. Tört négyzetgyöke egyenlő a számláló és a nevező négyzetgyökének hányadosával.
 	\end{theorem}
@@ -811,6 +886,13 @@
 			\2 Kamatos kamatnál a kamattényező kiszámítása
 			\2 Harmonikus rezgőmozgás körfrekvenciájának kiszámítása
 	\end{outline}
+\section{Matematikatörténet}
+	\begin{outline}
+		\1 Oresmicus (XIV. század)
+			\2 Foglalkozott először törtkitevőjű hatványokkal
+		\1 Stifel (XV-XVI. század)
+			\2 Nulladik és negatív egész kitevőjű hatványok
+	\end{outline}
 \chapter{Logaritmus}
 \section{Logaritmus definíciója}
 	\begin{definition}
@@ -855,41 +937,10 @@
 	\begin{definition}
 		Az $f:\mathbb{R}\longrightarrow\mathbb{R},\ f(x)=a^x(a>0)$ függvényt exponenciális függvénynek nevezzük. $a$=1 esetén az exponenciális függvény konstans: $f(x)=1^x=1$.
 	\end{definition}
-	\begin{outline}
-		\1 $0<a<1$
-			\2[] \begin{tikzpicture}
-			\begin{axis}[axis y line=center,
-			axis x line=middle,width=7cm]
-			\addplot+[mark=none] {0.5^x};
-			\end{axis}
-			\end{tikzpicture}
-			\2 Értelmezési tartomány: $\mathbb{R}$
-			\2 Értékkészlet:$\mathbb{R}^+$
-			\2 Szigorúan monoton csökken
-			\2 Szélsőértéke nincs
-			\2 Konvex
-			\2 Zérushelye nincs
-			\2 Nem páros, nem páratlan
-			\2 Alulról korlátos
-			\2 Invertálható, inverze: $f^{-1}:\mathbb{R}^+\longrightarrow\mathbb{R},\ f^{-1}(x)=\log_ax$
-		\1 $0<a<1$
-			\2[] \begin{tikzpicture}
-			\begin{axis}[axis y line=center,
-			axis x line=middle,width=7cm]
-			\addplot+[mark=none] {2^x};
-			\end{axis}
-			\end{tikzpicture}
-		\2 Értelmezési tartomány: $\mathbb{R}$
-		\2 Értékkészlet:$\mathbb{R}^+$
-		\2 Szigorúan monoton nő
-		\2 Szélsőértéke nincs
-		\2 Konvex
-		\2 Zérushelye nincs
-		\2 Nem páros, nem páratlan
-		\2 Alulról korlátos
-		\2 Invertálható, inverze: $f^{-1}:\mathbb{R}^+\longrightarrow\mathbb{R},\ f^{-1}(x)=\log_ax$
-	\1 Folytonos, differenciálható, integrálható
-	\end{outline}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{Exp}
+	\end{figure}
 \section{Logaritmusfüggvény}
 	\begin{definition}
 		Az $f:\mathbb{R}^+\longrightarrow\mathbb{R},\ f(x)=\log_ax,\ (a>0,\ a\ne1)$ függvényt logaritmusfüggvénynek nevezzük.
@@ -906,6 +957,14 @@
 		\item A Richter-skála logaritmus alapú
 		\item Exponenciális függvény írja le a radioaktív izotópok bomlását
 	\end{itemize}
+\section{Matematikatörténet}
+	\begin{outline}
+		\1 Napier (XVI-XVII. század)
+			\2 Logaritmus: matematikai számítások megkönnyítése
+			\2 Csillagászati számításoknál volt hasznos
+		\1 Bürgi (XVI-XVII. század)
+			\2 Első logaritmustáblázat
+	\end{outline}
 \chapter{Egyenlet-megoldási módszerek}
 \section{Egyenlet}
 	\begin{definition}
@@ -1053,8 +1112,18 @@
 	\begin{itemize}
 		\item Egyenes, kör, parabola adott abszcisszájú vagy ordinátájú pontjának meghatározása
 		\item Koszinusztételből oldalak kiszámítása
-		\item Mély szakadék mélységének meghatározása: egy ledobott kő dobásától a szakadék alján történő koppanás hangjának meghallásáig eltelt idő mérésével.
 	\end{itemize}
+\section{Matematikatörténet}
+	\begin{outline}
+		\1 Vi\`ete (XVI. század)
+			\2 Másodfokú egyenlet gyökök és együtthatók közti összefüggések
+		\1 Cardano (XVI. század)
+			\2 Harmadfokú egyenlet megoldóképlete
+				\3 Casus irreducibilis, ha 3 különböző valós gyök van
+			\2 Negyedfokú egyenlet visszavezetése harmadfokúra
+		\1 Abel (XIX. század)
+			\2 Negyedfokúnál magasabb fokú egyenletekre nincs általános megoldóképlet
+	\end{outline}
 \chapter{Statisztika}
 \section{Adatsokaságok jellemzői}
 	A statisztika feladatai közé tartozik, hogy bizonyos egyedek meghatározott tulajdonságairól
@@ -1168,6 +1237,10 @@
 			\end{definition}
 			\2 Megmutatja, adatok mennyire térnek el az átlagtól
 			\2 Minél kisebb, átlag annál jobban jellemez
+		\1[] 
+		\begin{theorem}[Bessel korrekció]
+			Ha $s^2$ a minta varianciája, akkor a populáció varianciáját jobban jellemzi: $s^2*\frac{n}{n-1}$.
+		\end{theorem}
 	\end{outline}
 \section{Pozitív számok nevezetes közepei}
 	\begin{definition}
@@ -1235,6 +1308,15 @@
 		\1 Nevezetes közepek
 			\2 Négyzetes közép: statisztikai szórás kiszámítása
 			\2 Harmonikus közép: átlagsebesség meghatározása
+	\end{outline}
+\section{Matematikatörténet}
+	\begin{outline}
+		\1 William Sealy Gosset (Student, XIX-XX. század)
+			\2 $t$ eloszlás
+			\2 Fizikai mérések véletlen hibájának becslése
+			\2 Konfidenciaintervallum: $t^*\frac{s}{\sqrt{n}}$
+		\1 Friedrich Bessel (XVIII-XIX. század)
+			\2 Bessel korrekció
 	\end{outline}
 \chapter{Számsorozatok}
 \section{Számsorozat}
@@ -1359,8 +1441,14 @@
 			\sin(x)&=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\dots=\sum_{n=0}^{\infty} \left(\frac{(-1)^n*x^{2n-1}}{(2n-1)!}\right)\\
 			\cos(x)&=1-\frac{x^2}{2!}+\frac{x^4}{4!}-\dots=\sum_{n=0}^{\infty} \left(\frac{(-1)^n*x^{2n}}{(2n)!}\right)\\
 		\end{align*}
-		\item Analízis: függvény határértékénél, folytonosságánál
 	\end{itemize}
+\section{Matematikatörténet}
+	\begin{outline}
+		\1 Euler (XVIII. század)
+			\2 $\lim\limits_{n\to\infty} \left(1+\frac{1}{n}\right)^n=e$ határérték bevezetése
+		\1 Cauchy (XVIII-XIX. század)
+			\2 Analízis alapvető fogalmainak (konvergencia, sorozat, határérték) szilárd alapokra fektetése
+	\end{outline}
 \chapter{Mértani sorozat}
 \section{Mértani sorozat}
 	\begin{definition}
@@ -1482,6 +1570,19 @@
 			\2 Radioaktív izotópok bomlási egyenletei
 			\2 Oldódás folyamata
 			\2 Kondenzátor feltöltődésének, kisülésének folyamata
+	\end{outline}
+\section{Matematikatörténet}
+	\begin{outline}
+		\1 Beidomandi (1300-as évek)
+			\2 Mértani sorozat összegképlete
+		\1 Koch (XIX-XX. század)
+			\2 Koch-görbe: Szabályos háromszög oldalainak harmadolása, középső harmad fölé kifele szabályos háromszög. Ezen háromszögön újból harmadolás. Kerület, terület kiszámítása mértani sor összegeként:
+				\3 $K=\infty$
+				\3 $T=\frac{2a^2\sqrt{3}}{5}$
+			\2[] \begin{figure}[H]
+				\centering
+				\includegraphics[width=0.8\linewidth]{Koch}
+			\end{figure}
 	\end{outline}
 \chapter{Deriválás}
 \section{Függvény fogalma, értelmezési tartomány, értékkészlet}
@@ -1661,6 +1762,11 @@
 			\2 Adott sugarú gömbbe írt hengerek közül melyiknek a térfogata maximális?
 		\1 Taylor-sor:
 			\2 $T_n=\frac{f^{(n)}(a)*(x-a)^n}{n!}$
+			\2[]
+			\begin{align*}
+				\sin(x)&=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\dots=\sum_{n=0}^{\infty} \left(\frac{(-1)^n*x^{2n-1}}{(2n-1)!}\right)\\
+				\cos(x)&=1-\frac{x^2}{2!}+\frac{x^4}{4!}-\dots=\sum_{n=0}^{\infty} \left(\frac{(-1)^n*x^{2n}}{(2n)!}\right)\\
+			\end{align*}
 	\end{outline}
 \section{Matematikatörténet}
 	\begin{outline}
@@ -1769,6 +1875,31 @@
 		\implies \text{tg}\alpha*\text{ctg}\alpha&=1\ (\alpha\ne k\frac{\pi}{2},\ k\in\mathbb{Z})\\
 		\sin^2\alpha+\cos^2\alpha&=1\ \forall\alpha\in\mathbb{R}
 	\end{align*}
+\section{Alkalmazások}
+	\begin{outline}
+		\1 Pitagorasz-tétel
+			\2 Koordinátageometria: két pont távolsága, vektor hossza
+		\1 Forgásszögek szögfüggvényei:
+			\2 Rezgőmozgás kitérés-idő, sebesség-idő, gyorsulás-idő függvénye
+			\begin{align*}
+				x(t)&=A*\sin(\omega t+\varphi_0)\\
+				v(t)&=A\omega*\cos(\omega t+\varphi_0)\\
+				a(t)&=-A\omega^2*\sin(\omega t+\varphi_0)\\
+			\end{align*}
+	\end{outline}
+\section{Matematikatörténet}
+	\begin{outline}
+		\1 Pitagorasz (Kr. e. VI. század)
+			\2 Tételét babilóniaiak is ismerték
+			\2 Hozzá fűződik, mert rájött egy új bizonyítására
+		\1 Leonhard Euler (XVIII. század)
+			\2 Végtelen sorok
+			\begin{align*}
+				\sin(x)&=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\dots=\sum_{n=0}^{\infty} \left(\frac{(-1)^n*x^{2n-1}}{(2n-1)!}\right)\\
+				\cos(x)&=1-\frac{x^2}{2!}+\frac{x^4}{4!}-\dots=\sum_{n=0}^{\infty} \left(\frac{(-1)^n*x^{2n}}{(2n)!}\right)\\
+			\end{align*}
+			\2 Euler-képlet: $e^{ix}=\cos x+i\sin x$
+	\end{outline}
 \chapter{Háromszögek nevezetes vonalai, pontjai és körei}
 \section{Oldalfelező merőlegesek, a háromszög köré írt kör középpontja}
 	\begin{definition}
@@ -1863,6 +1994,8 @@
 	\begin{theorem}
 		Egy háromszög Feuerbach-köre érinti a háromszög beírt körét, és hozzáírt köreit.
 	\end{theorem}
+\section{Alkalmazások}
+
 \chapter{Összefüggések általános háromszögben}
 \section{Háromszögek csoportosítása}
 	\begin{definition}
@@ -3102,5 +3235,233 @@
 			P(A|B)=\frac{P(A*B)}{P(B)}
 		\end{equation*}
 	\end{definition}
+	\begin{theorem}[Bayes-tétel]
+		\begin{equation*}
+			P(A|B)=\frac{P(B|A)*P(A)}{P(B)}
+		\end{equation*}	
+	\end{theorem}
+	\begin{definition}
+		$A$ és $B$ események függetlenek, ha $P(A|B)=P(A)$. Ekkor $P(A*B)=P(A)*P(B)$.
+	\end{definition}
+	\begin{definition}
+		Ha egy esemény előfordulását geometriai alakzat mértékével jellemezzük, és az esemény bekövetkezésének valószínűségét ezek hányadosával fejezzük ki, akkor geometriai valószínűségről beszélünk.
+	\end{definition}
+\section{Diszkrét eloszlások}
+	\begin{definition}
+		A valószínűségi változó az eseménytéren értelmezett valós értékű függvény. Jele: $\xi$.
+	\end{definition}
+	\begin{definition}
+		Ha a valószínűségi változó lehetséges értékeinek száma véges vagy megszámlálhatóan végtelen, akkor diszkrét valószínűségi változóról beszélünk.
+	\end{definition}
+	\begin{definition}
+		A visszatevés nélküli mintavétel eloszlását hipergeometrikus eloszlásnak nevezzük.
+	\end{definition}
+	\begin{theorem}
+		Hipergeometrikus eloszlásnál van $N$ db elemünk, amelyből $M$ db elem rendelkezik egy adott $A$ tulajdonsággal, $N-M$ db pedig nem. Visszatevés nélkül kiválasztunk $n$ db-ot. Annak a valószínűsége, hogy $k$ db rendelkezik $A$ tulajdonsággal:
+		\begin{equation*}
+			P(\xi=k)=\frac{\binom{M}{k}*\binom{N-M}{n-k}}{\binom{N}{n}},\text{ ahol }k\le n
+		\end{equation*}
+	\end{theorem}
+	\begin{proof}
+		A kedvező esetek száma: $\binom{M}{k}*\binom{N-M}{n-k}$, mert $M$ db-ból kell $k$ db-ot kiválasztani, és a maradék $N-M$ db-ból $n-k$ db-ot kell kiválasztani. Az összes eset száma: $\binom{N}{n}$, mert N db-ból kell n db-ot kiválasztani. Ezt felhasználva kapjuk: \begin{equation*}
+			P(\xi=k)=\frac{\binom{M}{K}*\binom{N-M}{n-k}}{\binom{N}{n}}
+		\end{equation*}
+	\end{proof}
+	\begin{theorem}
+		Hipergeometrikus eloszlásnál $A$ tulajdonságú elemek várható értéke:
+		\begin{equation*}
+			M(\xi)=n*\frac{M}{N}
+		\end{equation*}
+	\end{theorem}
+\chapter{Valószínűségszámítás 2.}
+\section{Permutációk}
+	\begin{definition}
+		Egy adott $n$ elemű halmaz elemeinek ismétlés nélküli permutációján az $n$ különböző elem sorba rendezését értjük.
+	\end{definition}
+	\begin{theorem}
+		Egy $n$ elemű halmaz ismétlés nélküli permutációinak száma:
+		\begin{equation*}
+			\prod_{i=0}^{n-1}n-i=n!
+		\end{equation*}
+	\end{theorem}
+	\begin{definition}
+		Ha az $n$ elem között van $k_1,k_2,\dots,k_m$ egymással megegyező, akkor az elemek sorba rendezését ismétléses permutációnak nevezzük.
+	\end{definition}
+	\begin{theorem}
+		Ha az $n$ elem között $k_1,k_2,\dots,k_m$ egymással megegyező van, és $\sum_{i=1}^{m}k_i=n$, akkor az ismétléses permutációk száma:
+		\begin{equation*}
+			\frac{n!}{\prod_{i=1}^{m}(k_i!)}
+		\end{equation*}
+	\end{theorem}
+\section{Variációk}
+	\begin{definition}
+		Van $n$ db egymástól különböző elemünk. Ha ezekből $k\le n$ db-ot kiválasztunk úgy, hogy az elemek sorrendje számít, akkor $n$ elem $k$-ad osztályú ismétlés nélküli variációját kapjuk.
+	\end{definition}
+	\begin{theorem}
+		$n$ elem $k$-ad osztályú ismétlés nélküli variációinak száma: $\frac{n!}{(n-k)!}$
+	\end{theorem}
+	\begin{definition}
+		Van $n$ db egymástól különböző elemünk. Ha ezekből $k\le n$ db-ot kiválasztunk úgy, hogy az elemek sorrendje számít, és egy elemet többször is kiválaszthatunk, akkor $n$ elem $k$-ad osztályú ismétléses variációját kapjuk.
+	\end{definition}
+	\begin{theorem}
+		$n$ elem $k$-ad osztályú ismétléses variációinak száma: $n^k$
+	\end{theorem}
+\section{A valószínűség-számítás alapjai}
+	\begin{definition}
+		Ha $n$-szer elvégzünk egy kísérletet, és $A$ esemény $k$-szor következik be, akkor az $A$ esemény relatív gyakorisága a $\frac{k}{n}$ hányados.
+	\end{definition}
+	\begin{definition}
+		Ha sokszor elvégzünk egy kísérletet, akkor megfigyelhetjük, hogy egy $A$ esemény
+		relatív gyakorisága egy szám körül ingadozik. Ezt a számot nevezzük az $A$ esemény valószínűségének. Jele: $P(A)$.
+	\end{definition}
+	\begin{definition}
+		A valószínűség kiszámításának klasszikus modelljét akkor alkalmazhatjuk, ha egy kísérletnek véges sok kimenetele van és ezek valószínűsége egyenlő Ekkor az $A$ esemény valószínűsége:
+		\begin{equation*}
+		P(A)=\frac{\text{kedvező elemi események száma}}{\text{összes elemi esemény száma}}
+		\end{equation*}
+	\end{definition}
+	\begin{outline}
+		\1 Axiómák
+		\2 $0\le P(A)\le1$
+		\2 Biztos esemény valószínűsége 1, lehetetlen eseményé 0.
+		\2 Ha $A$ és $B$ egymást kizáró események, akkor $P(A+B)=P(A)+P(B)$
+		\2 $P(A+B)=P(A)+P(B)-P(A*B)$
+		\2 $P(A)+P(\overline{A})=1$
+	\end{outline}
+	\begin{definition}
+		Az $A$ esemény $B$-re vonatkozó feltételes valószínűsége: \\
+		\begin{equation*}
+		P(A|B)=\frac{P(A*B)}{P(B)}
+		\end{equation*}
+	\end{definition}
+	\begin{theorem}[Bayes-tétel]
+		\begin{equation*}
+		P(A|B)=\frac{P(B|A)*P(A)}{P(B)}
+		\end{equation*}	
+	\end{theorem}
+	\begin{definition}
+		$A$ és $B$ események függetlenek, ha $P(A|B)=P(A)$. Ekkor $P(A*B)=P(A)*P(B)$.
+	\end{definition}
+	\begin{definition}
+		Ha egy esemény előfordulását geometriai alakzat mértékével jellemezzük, és az esemény bekövetkezésének valószínűségét ezek hányadosával fejezzük ki, akkor geometriai valószínűségről beszélünk.
+	\end{definition}
+\section{Diszkrét eloszlások}
+	\begin{definition}
+		A valószínűségi változó az eseménytéren értelmezett valós értékű függvény. Jele: $\xi$.
+	\end{definition}
+	\begin{definition}
+		Ha a valószínűségi változó lehetséges értékeinek száma véges vagy megszámlálhatóan végtelen, akkor diszkrét valószínűségi változóról beszélünk.
+	\end{definition}
+	\begin{definition}
+		Binomiális eloszlás olyan kísérletnél fordul elő, amelynek 2 kimenetele lehetséges: az $A$ esemény $p$ valószínűséggel bekövetkezik, vagy $1-p$ valószínűséggel nem következik be.
+	\end{definition}
+	\begin{theorem}
+		Binomiális eloszlásnál, ha a kísérletet $n$-szer ismételjük, akkor annak a valószínűsége, hogy az $A$ esemény $k\le n$-szer következik be:
+		\begin{equation*}
+			P(\xi=k)=\binom{n}{k}*p^k*(1-p)^{n-k}
+		\end{equation*}
+	\end{theorem}
+	\begin{theorem}
+		A binomiális eloszlás várható értéke: $n*p$
+	\end{theorem}
+	\begin{theorem}
+		A binomiális eloszlás varianciája: $n*p(1-p)$
+	\end{theorem}
+	\begin{proof}
+		
+	\end{proof}
+\section{Geometriai valószínűség}
+	Adott egy pontok alkotta geometriai alakzat. Elemi eseménynek ekkor az adott ponthalmazból az
+	egyik pont kiválasztása, azaz ekkor az elemi eseménynek pontokat feleltetünk meg. Egy esemény
+	azt jelenti, hogy a kiválasztott pont beletartozik egy bizonyos kijelölt részponthalmazba, résztartományba, vagyis az események ponthalmazok, tartományok. Ekkor az eseménytér egy geometriai
+	alakzat, az esemény ezen pontok egy bizonyos tulajdonsággal rendelkező részhalmaza, az elemi
+	esemény a geometriai alakzat egy pontja.
+	\begin{definition}
+		Ha az esemény bekövetkezésének valószínűsége arányos a részhalmaz mértékszámával,
+		akkor geometriai valószínűségéről beszélünk. Ekkor $A$ esemény valószínűsége:
+		\begin{equation*}
+			P(A)=\frac{\text{$A$ eseménynek megfelelő részalakzat mértéke}}{a kísérlettel kapcsolatos teljes alakzat mértéke}=\frac{m}{M}
+		\end{equation*}
+		A mérték lehet hosszúság, terület, térfogat.
+	\end{definition}
+	Példák:
+	\begin{itemize}
+		\item Egy adott méretű darts táblán egy bizonyos részbe való találat valószínűsége
+		\item Két ember találkozásának valószínűsége egy bizonyos órában, ha egyikük sem vár 15 percnél
+		többet
+		\item Meteor szárazföldre való becsapódásának valószínűsége
+	\end{itemize}
+\chapter{Bizonyítási módszerek}
+\section{Bizonyítások a matematikában}
+	A matematika különböző ágai hasonlóan épülnek fel. Meghatározunk alapfogalmakat, majd ezek	segítségével további fogalmakat definiálunk. Kimondunk axiómákat, amelyek igazságát elfogadjuk. Az axiómákból elindulva a matematikai logika eszközeivel, helyes következtetéseken keresztül további tételeket bizonyítunk be. A bizonyítás eljárási mód egy állítás helyességének indoklására a matematikai logika műveleteinek felhasználásával. A matematikai tételek általában implikációk vagy ekvivalenciák.
 	
+	Az implikációk bizonyítása során a feltételből helyes matematikai következtetésekkel el kell jutni
+	a következményhez. Bizonyítás közben a definíciókat, axiómákat, és a már bizonyított tételeket
+	felhasználhatjuk. Így belátjuk, hogy a feltétel valóban elégséges feltétele a következménynek.
+	Ekvivalenciák bizonyítása során két implikációt bizonyítunk be.
+\section{Direkt bizonyítás}
+	\begin{definition}
+		A direkt bizonyítás során igaz állításokból kiindulva matematikailag helyes következtetésekkel eljutunk a bizonyítandó állításhoz.
+	\end{definition}
+	\begin{theorem}
+		Ha $a,b\in\mathbb{N}$, akkor
+		\begin{equation*}
+			7|a-2b\implies 7|10a+b
+		\end{equation*}
+	\end{theorem}
+	\begin{proof}
+		\begin{align*}
+			7|a-2b&\implies a-2b=7k\ (k\in\mathbb{Z})\implies 10a-20b=70k\implies\\
+			&\implies 10a-20b+b=70k+b\implies 10a+b=70k+21b
+		\end{align*}
+		Mivel $70k$, és $21b$ osztható 7-tel, $7|a-2b\implies 7|10a+b$
+	\end{proof}
+\section{Indirekt bizonyítás}
+	\begin{definition}
+		Az indirekt bizonyítás olyan eljárás, melynek során feltesszük, hogy a bizonyítandó állítás nem igaz, és ebből kiindulva helyes következtetésekkel lehetetlen következményekhez jutunk el. Így a kiinduló feltevés volt téves, vagyis a bizonyítandó állítás valójában igaz.
+	\end{definition}
+	\begin{theorem}
+		$\sqrt{2}$ irracionális szám.
+	\end{theorem}
+	\begin{proof}
+		A bizonyítás indirekt módon történik. Tegyük fel, hogy 
+		\begin{equation}\label{eq:24.1}
+		\sqrt{2}=\frac{a}{b}\qquad a\wedge b\in\mathbb{Z}\wedge b\ne0\wedge(a;b)=1
+		\end{equation}
+		Ebből következik, hogy:
+		\begin{equation}
+		2=\frac{a^2}{b^2}\implies a^2=2b^2
+		\end{equation}
+		Az egyenlet jobb oldalán szereplő szám prímtényezős felbontásában a 2 páros kitevőn szerepel, míg a bal oldalon levő szám prímtényezős felbontásában a 2 kitevője páratlan.
+		
+		Ez azonban lehetetlen, hiszen a számelmélet alaptétele szerint egy pozitív egész számnak
+		nincs két lényegesen különböző felbontása. 
+		
+		Emiatt \eqref{eq:24.1} hamis, vagyis $\sqrt{2}$ irracionális.
+	\end{proof}
+\section{Teljes indukció}
+	\begin{definition}
+		A teljes indukció olyan állítások bizonyítására alkalmas, melyek $n$ pozitív egész számtól függenek. Jelöljük az állítást $P$-vel, illetve jelölje $P(n)$, hogy $P$ igaz $n$-re. A teljes indukciós eljárás során először bebizonyítjuk az állítást a kezdeti értékre, majd bizonyítjuk, hogy $P(k)\implies P(k+1)$. Ezzel az állítást minden $n$ pozitív egész számra belátjuk.
+	\end{definition}
+	\begin{theorem}
+		Az első $n$ pozitív egész szám négyzetének összege: $\frac{n(n+1)(2n+1)}{6}$.
+	\end{theorem}
+	\begin{proof}
+		A bizonyítás teljes indukcióval történik. Ha $n=1$, akkor $1^2=1=\frac{1*2*3}{6}=1$. Tegyük fel, hogy $n=k$-ra igaz az állítás, azaz: $\sum_{i=1}^{k} i^2=\frac{k(k+1)(2k+1)}{6}$. Be kéne látni, hogy $\sum_{i=1}^{k+1} i^2=\frac{(k+1)(k+2)(2k+3)}{6}$.
+		\begin{align*}
+			\sum_{i=1}^{k+1} i^2&=\frac{k(k+1)(2k+1)}{6}+(k+1)^2=(k+1)*\frac{k(2k+1)+6(k+1)}{6}=\\
+			&=(k+1)*\frac{2k^2+k+6k+6}{6}=\frac{(k+1)(k+2)(2k+3)}{6}
+		\end{align*}
+		Vagyis az állítás teljesül $\forall n\in\mathbb{N}^+$.
+	\end{proof}
+\section{Skatulya-elv}
+	\begin{theorem}
+		Ha $n$ db skatulyába $k*n$ db-nál több elemet kell szétosztani, akkor a skatulyák valamelyikébe legalább $k+1$ elem kerül $(n,k\in\mathbb{Z})$.
+	\end{theorem}
+	\begin{theorem}
+		$n+1$ db pozitív egész szám között biztosan van 2 olyan, amelyek különbsége osztható n-el.
+	\end{theorem}
+	\begin{proof}
+		Legyen $n$ db skatulya az $n$-el való osztási maradékok. Mivel $n+1$ db szám van, biztosan lesz olyan skatulya, ahova 2 szám kerül. Ennek a 2 számnak a különbsége osztható $n$-el.
+	\end{proof}
 \end{document}
