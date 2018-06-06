@@ -1152,6 +1152,37 @@
 		\item Egyenes, kör, parabola adott abszcisszájú vagy ordinátájú pontjának meghatározása
 		\item Koszinusztételből oldalak kiszámítása
 	\end{itemize}
+	\begin{outline}
+		\1 Vi\`ete ugrás (1988. IMO 6. feladat)
+			\2  Indirekt bizonyítás
+			\2 Legyen $a,b\in\mathbb{N}^+$, $(ab+1)|\left(a^2+b^2\right)$. Bizonyítsuk, hogy $\frac{a^2+b^2}{ab+1}$ teljes négyzet.
+			\2 Indirekt bizonyítás
+			\2 Legyen $k\in\mathbb{Z}^+$ úgy, hogy nem teljes négyzet. Tegyük fel, hogy: $\exists (a,\ b)\ k=\frac{a^2+b^2}{ab+1}$.
+			\2 Legyenek $(A,\ B)\in\mathbb{Z}^+$, amikre: $k=\frac{A^2+B^2}{AB+1}$ úgy, hogy $A+B$ minimális. Az általánosság megszorítása nélkül feltehetjük, hogy $A\ge B$.
+			\2 $A$ helyére $x$-et írva:
+			\begin{align*}
+				k&=\frac{x^2+B^2}{xB+1}\\
+				kxB+k&=x^2+B^2\\
+				x^2-(kB)x+(B^2-k)&=0
+			\end{align*}
+			\2 Tudjuk, hogy az egyik gyök: $x_1=A$. A másik gyökre igaz, hogy:
+			\begin{equation*}
+				x_2=kB-A\wedge x_2=\frac{B^2-k}{A}
+			\end{equation*}
+			\2 Első kifejezés miatt: $x_2\in\mathbb{Z}$. A másodikból: $x_2\ne0$, mert $k$ nem teljes négyzet
+			\2 $\frac{x_2^2+B^2}{x_2B+1}=k>0\implies x_2>0$, mert a számláló, és a tört értéke pozitív, így a nevezőnek is pozitívnak kell lennie: $x_2B+1>0\implies x_2B>-1$. Mivel $B$ pozitív egész, $x_2$ nem lehet negatív.
+			\2[] 
+			\begin{align*}
+				A&\ge B\tag{Mivel mindkét oldal pozitív}\\
+				A^2&\ge B^2\\
+				A^2-k&\ge B^2-k\tag{Mivel $A>0$}\\
+				A-\frac{k}{A}&\ge \frac{B^2-k}{A}\\
+				\frac{B^2-k}{A}&\le A-\frac{k}{A}<A\\
+				x_2&<A\\
+				x_2+B&<A+B
+			\end{align*}
+			\2 Ez azonban ellentmond $(A,\ B)$ minimalitásának
+	\end{outline}
 \section{Matematikatörténet}
 	\begin{outline}
 		\1 Vi\`ete (XVI. század)
