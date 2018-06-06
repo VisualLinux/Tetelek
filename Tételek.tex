@@ -549,7 +549,7 @@
 \section{A matematikai logika fogalma}
 	A matematikai logika a gondolkodás matematikai formában kifejezhető, matematikai eszközökkel	vizsgálható összefüggéseinek, törvényeinek feltárásával foglalkozik. Fõ feladata a következtetések helyességének vizsgálata.
 \section{Logikai műveletek}
-	\begin{definition}[Állítás]
+	\begin{definition}[Állítás/kijelentés]
 		Olyan kijelentő mondat, amelyről egyértelműen el lehet dönteni, hogy igaz vagy hamis.
 	\end{definition}
 	\begin{definition}
@@ -560,7 +560,7 @@
 		A kijelentéseket összekapcsolhatjuk. Azokat a kijelentéseket, amelyeket más kijelentésekből lehet előállítani, összetett kijelentéseknek nevezzük.
 	\end{definition}
 	\begin{definition}
-		Ha az összetett kijelentések logikai értéke csak az õt alkotó állítások logikai értékétől és az előállítás módjától függ, akkor logikai műveletekről beszélünk.
+		Ha az összetett kijelentések logikai értéke csak az őt alkotó állítások logikai értékétől és az előállítás módjától függ, akkor logikai műveletekről beszélünk.
 	\end{definition}
 	Logikai műveleteket igazságtábla segítségével végezhetünk el.
 	\begin{definition}
@@ -582,38 +582,72 @@
 	\begin{definition}[Diszjunkció (megengedő vagy)]
 		Két kijelentés diszjunkciója pontosan akkor igaz, ha legalább az egyik kijelentés igaz, különben hamis. Jele: $A \vee B$.
 	\end{definition}
-	\begin{definition}[Antivalencia (kizáró vagy)]
-		Két kijelentés antivalenciája pontosan akkor igaz, ha pontosan az egyik kijelentés igaz, különben hamis. Jele: $A\oplus B$.
-	\end{definition}
-	\begin{definition}[Konjunkció (és)]
-		Két kijelentés konjunkciója pontosan akkor igaz, ha mindkét kijelentés igaz, különben hamis. Jele: $A\wedge B$.
-	\end{definition}
-	\begin{definition}[Implikáció (következtetés)]
-		A \enquote{ha A, akkor B} kapcsolatnak megfelelő logikai művelet. Logikai értéke pontosan akkor hamis, ha A igaz és B hamis, különben igaz. Az A állítást feltételnek, B-t következménynek nevezzük. Jele: $A\rightarrow B$
-	\end{definition}
-	\begin{definition}[Ekvivalencia]
-		Az \enquote{A akkor és csak akkor B} kapcsolatnak megfelelő logikai művelet. Logikai értéke pontosan akkor igaz, ha A és B logikai értéke azonos, különben hamis. Jele: $A\leftrightarrow B$
-	\end{definition}
-	Ha $A\leftrightarrow B$ igaz, akkor A és B állítások ekvivalensek egymással.
-	\subsection{Műveleti tulajdonságok}
-	\begin{itemize}
-		\item Diszjunkció
+	\begin{outline}
+		\1 Tulajdonságok
+			\2[] 
 			\begin{align*}
 				A\vee A&=A\\
 				A\vee \neg A&=i\\
 				A\vee B&=B\vee A\tag{Kommutatív}\\
-				(A\vee B)\vee C&=A\vee(B\vee C)\tag{Asszociatív}\\
-				A\vee(B\wedge C)&=(A\vee B)\wedge(A\vee C)\tag{Konjunkcióra nézve disztributív}
+				(A\vee B)\vee C&=A\vee(B\vee C)\tag{Asszociatív}
 			\end{align*}
-		\item Konjunkció
+	\end{outline}
+	\begin{definition}[Konjunkció (és)]
+		Két kijelentés konjunkciója pontosan akkor igaz, ha mindkét kijelentés igaz, különben hamis. Jele: $A\wedge B$.
+	\end{definition}
+	\begin{outline}
+		\1 Tulajdonságok
+			\2[] 
 			\begin{align*}
 				A\wedge A&=A\\
 				A\wedge \neg A&=h\\
 				A\wedge B&=B\wedge A\tag{Kommutatív}\\
 				(A\wedge B)\wedge C&=A\wedge(B\wedge C)\tag{Asszociatív}\\
-				A\wedge(B\vee C)&=(A\wedge B)\vee(A\wedge C)\tag{Diszjunkcióra nézve disztributív}
+				A\wedge(B\vee C)&=(A\wedge B)\vee(A\wedge C)\tag{Diszjunkcióra nézve disztributív}\\
+				A\vee(B\wedge C)&=(A\vee B)\wedge(A\vee C)\tag{Konjunkcióra nézve disztributív}\\
+				\neg(A\vee B)&=(\neg A)\wedge(\neg B),\quad \neg(A\wedge B)=(\neg A)\vee(\neg B)\tag{De Morgan azonosságok}
 			\end{align*}
-	\end{itemize}
+	\end{outline}
+	\begin{definition}[Antivalencia (kizáró vagy)]
+		Két kijelentés antivalenciája pontosan akkor igaz, ha pontosan az egyik kijelentés igaz, különben hamis. Jele: $A\oplus B$.
+	\end{definition}
+	\begin{outline}
+		\1 Tulajdonságok
+			\2[] 
+			\begin{align*}
+				A\oplus A&=h\\
+				A\oplus \neg A&=i\\
+				A\oplus B&=B\oplus A\tag{Kommutatív}\\
+				(A\oplus B)\oplus C&=A\oplus(B\oplus C)\tag{Asszociatív}
+			\end{align*}
+	\end{outline}
+	\begin{definition}[Implikáció (következtetés)]
+		A \enquote{ha A, akkor B} kapcsolatnak megfelelő logikai művelet. Logikai értéke pontosan akkor hamis, ha A igaz és B hamis, különben igaz. Az A állítást feltételnek, B-t következménynek nevezzük. Jele: $A\rightarrow B$
+	\end{definition}
+	\begin{outline}
+		\1 Tulajdonságok
+			\2[] 
+			\begin{align*}
+				A\rightarrow A&=i\\
+				A\rightarrow \neg A&=\neg A\\
+				A\rightarrow B&\ne B\rightarrow A\tag{Nem kommutatív}\\
+				(A\rightarrow B)\rightarrow C&\ne A\rightarrow(B\rightarrow C)\tag{Nem asszociatív}
+			\end{align*}
+	\end{outline}
+	\begin{definition}[Ekvivalencia]
+		Az \enquote{A akkor és csak akkor B} kapcsolatnak megfelelő logikai művelet. Logikai értéke pontosan akkor igaz, ha A és B logikai értéke azonos, különben hamis. Jele: $A\leftrightarrow B$
+	\end{definition}
+	Ha $A\leftrightarrow B$ igaz, akkor A és B állítások ekvivalensek egymással.
+	\begin{outline}
+		\1 Tulajdonságok
+			\2[] 
+			\begin{align*}
+				A\leftrightarrow A&=i\\
+				A\leftrightarrow \neg A&=h\\
+				A\leftrightarrow B&=B\leftrightarrow A\tag{Kommutatív}\\
+				(A\leftrightarrow B)\leftrightarrow C&=A\leftrightarrow(B\leftrightarrow C) \tag{Asszociatív}
+			\end{align*}
+	\end{outline}
 	\begin{theorem}
 		Tetszőleges A és B kijelentésektre $A\rightarrow B=\neg A\vee B$.
 	\end{theorem}
@@ -632,7 +666,6 @@
 		Az ötödik oszlop igazságértékei megegyeznek az ekvivalencia igazságértékeivel, tehát az
 		egyenlőség A és B minden lehetséges logikai értékére fennáll, azaz azonosság.
 	\end{proof}
-\pagebreak
 \section{Állítás és megfordítása, szükséges és elégséges feltétel}
 	\begin{outline}
 		\1 $A\rightarrow B=i$
@@ -661,14 +694,13 @@
 		Ha egy háromszög derékszögű, akkor a befogók négyzetének összege egyenlő az átfogó négyzetével.
 	\end{theorem}
 	\begin{theorem}[Pithagorasz-tétel megfordítása]
-		ha egy háromszög két oldalhosszának négyzetének összege egyenlő a harmadik oldal négyzetével, akkor a háromszög derékszögű.
+		Ha egy háromszög két oldalhosszának négyzetének összege egyenlő a harmadik oldal négyzetével, akkor a háromszög derékszögű.
 	\end{theorem}
 \section{Alkalmazások}
 	\begin{itemize}
 		\item Matematikai definíciók, tételek pontos kimondása, tételek bizonyítása
 		\item Bizonyítási módszerek kidolgozása (direkt, indirekt, skatulya elv, teljes indukció)
 		\item Kombinatorika, valószínűségszámítás használja a logikai műveleteket és azok tulajdonságait.
-		\item Egyenletek, egyenlőtlenségek megoldása során sokszor végzünk logikai műveleteket (ekvivalens átalakítások).
 	\end{itemize}
 \section{Matematikatörténet}
 	\begin{outline}
@@ -694,6 +726,13 @@
 		\1 Ernst Zermalo, Abraham Fraenkel (20. század)
 			\2 ZF(C) axiomatikus rendszer halmazelméletre Russel paradoxon nélkül
 			\2 C -> Banach-Tarski paradoxon
+		\1 Euklidesz (Kr. e. 300 körül)
+			\2 Elemek című műve: geometriai axiómák, belőlük bizonyított tételek, szerkesztési módok
+			\2 Szerepelnek olyan tételek is, melyek nem következnek az axiómákból
+			\2 Pl.:  $ABC$ háromszög, $l$ egyenes $P$-n keresztül, $ABC$ egyik oldalán. Létezik $Q$ a háromszög másik oldalán, $l$ átmegy $Q$-n.
+				\3 Pasch fedezte fel XIX. században
+		\1 Hilbert (XIX. század)
+			\2 20 axióma geometriára
 	\end{outline}
 \chapter{Hatványozás, gyökvonás}
 \section{Pozitív egész kitevőjű hatványok}
@@ -3255,6 +3294,29 @@
 			T=\int_{a}^{b}(f(x)-g(x))dx\tag{ha $f(x)>g(x)$}
 		\end{equation*}
 	\end{theorem}
+\section{Alkalmazások}
+	\begin{outline}
+		\1 Pitagorasz tétel bizonyítása terület-összerakással
+		\1 Geometriai valószínűség kiszámítása
+		\1 Síkidomokkal, síkba kiteríthető felületekkel határolt testek felszínének meghatározása
+	\end{outline}
+\section{Matematikatörténet}
+	\begin{outline}
+		\1 Newton, Leibniz (XVII-XVIII. század)
+			\2 Egymástól függetlenül felfedezték a differenciál- és integrálszámítást
+			\2 Jelölések többnyire Leibniztől származnak
+	 	\1 Riemann (XIX. század)
+	 		\2 Riemann-integrál kifejlesztése
+ 		\1 Lebesgue (XIX-XX. század)
+ 			\2 Lebesgue-integrál kifejlesztése
+ 			\2 Riemann-integrál általánosítása
+ 			\2 $D(x)=\begin{cases}
+	 			0, & \text{ ha } x\in\mathbb{Q}\\
+	 			1, & \text{ ha } x\in\mathbb{Q}^*
+ 			\end{cases}$
+		 	\2 $\int_{[0;1]} D(x)d\mu=1$
+		 		\3 $\mu$ - Lebesgue-mérték
+	\end{outline}
 \chapter{Valószínűségszámítás 1.}
 \section{Kombinációk}
 	A kombinatorika, a valószínűség-számítás és a matematikai statisztika a véletlen tömegjelenségek
@@ -3295,9 +3357,20 @@
 	\subsection{Pascal háromszög}
 	A háromszögben a sorok számozása nullával kezdődik, a páratlan és a páros sorokban a számok el
 	vannak csúsztatva egymáshoz képest. A nulladik sorban csak egy darab 1-es van. A következő sorokban az új számot úgy kapjuk meg, ha összeadjuk a felette balra és felette jobbra található két számot. Ha az összeg egyik tagja hiányzik, akkor nullának kell tekinteni. Az $n$-edik sor $k$-adik eleme:
-	\begin{equation*}
-		\binom{n}{k}=\binom{n-1}{k-1}+\binom{n-1}{k}
-	\end{equation*}
+	\begin{theorem}
+		\begin{equation*}
+			\binom{n}{k}=\binom{n-1}{k-1}+\binom{n-1}{k}
+		\end{equation*}
+	\end{theorem}
+	\begin{proof}
+		\begin{align*}
+			&\binom{n-1}{k-1}+\binom{n-1}{k}=\frac{(n-1)!}{(k-1)!*(n-1-(k-1))!}+
+			\frac{(n-1)!}{k!*(n-1-k)!}=\\
+			&=\frac{(n-1)!}{(k-1)!*(n-k)!}+\frac{(n-1)!}{k!*(n-k-1)!}=
+			\frac{k*(n-1)!+(n-k)*(n-1)!}{k!*(n-k)!}=\\
+			&=\frac{(n-1)!(k+n-k)}{k!(n-k)!}=\frac{(n-1)!*n}{k!(n-k)!}=\frac{n!}{k!(n-k)!}=\binom{n}{k}
+		\end{align*}
+	\end{proof}
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=.3\linewidth]{Pascal}
@@ -3391,17 +3464,31 @@
 			P(\xi=k)=\frac{\binom{M}{k}*\binom{N-M}{n-k}}{\binom{N}{n}},\text{ ahol }k\le n
 		\end{equation*}
 	\end{theorem}
-	\begin{proof}
-		A kedvező esetek száma: $\binom{M}{k}*\binom{N-M}{n-k}$, mert $M$ db-ból kell $k$ db-ot kiválasztani, és a maradék $N-M$ db-ból $n-k$ db-ot kell kiválasztani. Az összes eset száma: $\binom{N}{n}$, mert N db-ból kell n db-ot kiválasztani. Ezt felhasználva kapjuk: \begin{equation*}
-			P(\xi=k)=\frac{\binom{M}{K}*\binom{N-M}{n-k}}{\binom{N}{n}}
-		\end{equation*}
-	\end{proof}
 	\begin{theorem}
 		Hipergeometrikus eloszlásnál $A$ tulajdonságú elemek várható értéke:
 		\begin{equation*}
 			M(\xi)=n*\frac{M}{N}
 		\end{equation*}
 	\end{theorem}
+\section{Alkalmazások}
+	\begin{outline}
+		\1 Kiválasztási problémák: 
+			\2 Hányféleképpen lehet kitölteni egy lottószelvényt?
+			\2 Egy $n$ elemű halmaznak hány $k$ elemű részhalmaza van?
+		\1 Klasszikus valószínűségi modell
+			\2 Szerencsejátékoknál nyerési esély megállapítása
+			\2 Mekkora a valószínűsége, hogy az 5-ös, 6-os lottón telitalálatos szelvényünk lesz?
+	\end{outline}
+\pagebreak
+\section{Matematikatörténet}
+	\begin{outline}
+		\1 Pascal (XVII. század)
+			\2 Binomiális együtthatók tanulmányozása, módszer kiszámításukra
+			\2 Pascal-háromszög
+		\1 Bernoulli (XVII. század)
+			\2 Kombinatorikai ismeretek alkalmazása valószínűség kiszámítására
+			\2 Jelentősen hozzájárult a valószínűségelmélet kifejlesztéséhez
+	\end{outline}
 \chapter{Valószínűségszámítás 2.}
 \section{Permutációk}
 	\begin{definition}
@@ -3497,7 +3584,32 @@
 		A binomiális eloszlás varianciája: $n*p(1-p)$
 	\end{theorem}
 	\begin{proof}
-		
+		$\sigma^2(\xi)=E(\xi^2)-E(\xi)^2$. Legyen $q=1-p$:
+		\begin{align*}
+			E(x^2)&=\sum_{k=0}^n k^2\binom{n}{k}p^kq^{n-k}=
+			\sum_{k=0}^{n}k^2*\frac{n!}{k!(n-k)!}*p^kq^{n-k}=\\
+			&=\sum_{k=0}^{n}k*n*\frac{(n-1)!}{(k-1)!*(n-1-(k-1))!}*p^kq^{n-k}=\sum_{k=0}^n k*n\binom{n-1}{k-1}p^kq^{n-k}=\\
+			&=n*p\sum_{k=1}^nk\binom{n-1}{k-1}p^{k-1}q^{n-1-(k-1)}
+		\end{align*}
+		Mivel, ha $k=0$, akkor a szummán belüli kifejezés 0. Legyen $j=k-1,$ $m=n-1,$ ekkor:
+		\begin{align*}
+			E(x^2)&=n*p\sum_{j=0}^{m}(j+1)\binom{m}{j}p^jq^{m-j}=\\
+			&=n*p\left(\sum_{j=0}^{m} \left(j\binom{m}{j}*p^jq^{m-j}\right)+ \sum_{j=0}^{m}\left(\binom{m}{j}p^jq^{m-j}\right)\right)=\\
+			&=n*p\left(\sum_{j=1}^{m} \left(j\frac{m!}{j!(m-j)!}*p^jq^{m-j}\right)+ \sum_{j=0}^{m}\left(\binom{m}{j}p^jq^{m-j}\right)\right)=\\
+			&=n*p\left(\sum_{j=1}^{m} \left(m\frac{(m-1)!}{(j-1)!(m-1-(j-1))!}*p^jq^{m-j}\right)+ \sum_{j=0}^{m}\left(\binom{m}{j}p^jq^{m-j}\right)\right)=\\
+			&=n*p\left(\sum_{j=1}^{m} \left(m\binom{m-1}{j-1}*p^jq^{m-j}\right)+ \sum_{j=0}^{m}\left(\binom{m}{j}p^jq^{m-j}\right)\right)=\\
+			&=n*p\left(m*p*\sum_{j=1}^{m}\left(\binom{m-1}{j-1}*p^{j-1}q^{m-1-(j-1)}\right)+ \sum_{j=0}^{m}\left(\binom{m}{j}p^jq^{m-j}\right)\right)
+		\end{align*}
+		Legyen $l=j-1,$ $k=m-1$:
+		\begin{align*}
+			E(x^2)&=n*p\left(m*p*\sum_{l=0}^{k}\left(\binom{k}{l}*p^{l}q^{k-l}\right)+ \sum_{j=0}^{m}\left(\binom{m}{j}p^jq^{m-j}\right)\right)=\\
+			&=n*p\left(m*p*(p+q)^k+(p+q)^m\right)=n*p(m*p+1)=\\
+			&=n*p((n-1)p+1)=n*p*(np-p+1)=n^2p^2-np^2+np
+		\end{align*}
+		Mivel tudjuk, hogy $E(x)=np\implies E^2(x)=n^2p^2$, ezért:
+		\begin{align*}
+			\sigma^2(x)&=E(x^2)-E^2(x)=n^2p^2-np^2+np-n^2p^2=np-np^2=np(1-p)
+		\end{align*}
 	\end{proof}
 \section{Geometriai valószínűség}
 	Adott egy pontok alkotta geometriai alakzat. Elemi eseménynek ekkor az adott ponthalmazból az
@@ -3520,6 +3632,29 @@
 		többet
 		\item Meteor szárazföldre való becsapódásának valószínűsége
 	\end{itemize}
+\section{Alkalmazások}
+	\begin{outline}
+		\1 Sorba rendezési problémák:
+			\2 Hányféleképpen lehet kitölteni egy lottószelvényt?
+		\1 Binomiális eloszlás
+			\2 Mekkora a valószínűsége, hogy a totón telitalálatos szelvényünk lesz?
+			\2 A gyártósorokon elkészült termékek közül a selejtek számának közelítő meghatározása várható érték segítségével.
+	\end{outline}
+\section{Matematikatörténet}
+	\begin{outline}
+		\1 Bernoulli (XVII. század)
+			\2 Kombinatorikai ismeretek alkalmazása valószínűség kiszámítására
+			\2 Jelentősen hozzájárult a valószínűségelmélet kifejlesztéséhez
+		\1 Buffon (XVIII. század)
+			\2 Tűprobléma: geometriai valószínűség fogalmának bevezetése
+			\2 Egy $l$ hosszú tűt ledobunk $d$ távolságban lévő párhuzamos vonalakra
+				\3 Mi a valószínűsége, hogy metszeni fog egy vonalat?
+				\3 Ha $l\le d$, akkor: $\frac{2l}{\pi d}$
+				\3 Ha $l>d$, akkor, hogy legalább egy vonalat metsz: $\frac{2}{\pi}*\left(x-\sqrt{x^2-1}+\arccos\frac{1}{x}\right)$
+		\1 Shannon (XX. század)
+			\2 Információelmélet megalapozója
+				\3 Valószínűségszámítás legfiatalabb ága
+	\end{outline}
 \chapter{Bizonyítási módszerek}
 \section{Bizonyítások a matematikában}
 	A matematika különböző ágai hasonlóan épülnek fel. Meghatározunk alapfogalmakat, majd ezek	segítségével további fogalmakat definiálunk. Kimondunk axiómákat, amelyek igazságát elfogadjuk. Az axiómákból elindulva a matematikai logika eszközeivel, helyes következtetéseken keresztül további tételeket bizonyítunk be. A bizonyítás eljárási mód egy állítás helyességének indoklására a matematikai logika műveleteinek felhasználásával. A matematikai tételek általában implikációk vagy ekvivalenciák.
@@ -3593,4 +3728,46 @@
 	\begin{proof}
 		Legyen $n$ db skatulya az $n$-el való osztási maradékok. Mivel $n+1$ db szám van, biztosan lesz olyan skatulya, ahova 2 szám kerül. Ennek a 2 számnak a különbsége osztható $n$-el.
 	\end{proof}
+\section{Alkalmazások}
+	\begin{outline}
+		\1 Teljes indukció:
+			\2 Rekurzívan definiált sorozatoknál n-edik tag általános képletének bizonyítása
+		\1 Direkt bizonyítás:
+			\2 Implikációk bizonyítása
+	\end{outline}
+\section{Matematikatörténet}
+	\begin{outline}
+		\1 Maurolicio (XVI. század)	
+			\2 Első teljes indukció: első $n$ páratlan szám összege
+		\1 Dirichlet (XIX. század)
+			\2 Skatulyaelv bizonyítása
+		\1 Vi\`ete ugrás (1988. IMO 6. feladat)
+			\2  Indirekt bizonyítás
+			\2 Legyen $a,b\in\mathbb{N}^+$, $(ab+1)|\left(a^2+b^2\right)$. Bizonyítsuk, hogy $\frac{a^2+b^2}{ab+1}$ teljes négyzet.
+			\2 Indirekt bizonyítás
+			\2 Legyen $k\in\mathbb{Z}^+$ úgy, hogy nem teljes négyzet. Tegyük fel, hogy: $\exists (a,\ b)\ k=\frac{a^2+b^2}{ab+1}$.
+			\2 Legyenek $(A,\ B)\in\mathbb{Z}^+$, amikre: $k=\frac{A^2+B^2}{AB+1}$ úgy, hogy $A+B$ minimális. Az általánosság megszorítása nélkül feltehetjük, hogy $A\ge B$.
+			\2 $A$ helyére $x$-et írva:
+				\begin{align*}
+					k&=\frac{x^2+B^2}{xB+1}\\
+					kxB+k&=x^2+B^2\\
+					x^2-(kB)x+(B^2-k)&=0
+				\end{align*}
+			\2 Tudjuk, hogy az egyik gyök: $x_1=A$. A másik gyökre igaz, hogy:
+				\begin{equation*}
+					x_2=kB-A\wedge x_2=\frac{B^2-k}{A}
+				\end{equation*}
+			\2 Első kifejezés miatt: $x_2\in\mathbb{Z}$. A másodikból: $x_2\ne0$, mert $k$ nem teljes négyzet
+			\2 $\frac{x_2^2+B^2}{x_2B+1}=k>0\implies x_2>0$, mert a számláló, és a tört értéke pozitív, így a nevezőnek is pozitívnak kell lennie: $x_2B+1>0\implies x_2B>-1$. Mivel $B$ pozitív egész, $x_2$ nem lehet negatív.
+			\2[] \begin{align*}
+				A&\ge B\tag{Mivel mindkét oldal pozitív}\\
+				A^2&\ge B^2\\
+				A^2-k&\ge B^2-k\tag{Mivel $A>0$}\\
+				A-\frac{k}{A}&\ge \frac{B^2-k}{A}\\
+				\frac{B^2-k}{A}&\le A-\frac{k}{A}<A\\
+				x_2&<A\\
+				x_2+B&<A+B
+			\end{align*}
+			\2 Ez azonban ellentmond $(A,\ B)$ minimalitásának
+	\end{outline}
 \end{document}
