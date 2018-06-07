@@ -2444,14 +2444,52 @@
 	\end{theorem}
 \section{Középponti és kerületi szögek}
 	\begin{definition}
-		Ha egy szög csúcsa egy adott kör középpontja, akkor a szöget középponti szögnek nevezzük. Ebben az esetben a szög szárai két sugárra illeszkednek.
+		Ha egy szög csúcsa egy adott körvonal egy pontja, szárai a kör két húrja, akkor a szöget kerületi szögnek nevezzük.
 	\end{definition}
 	\begin{definition}
-		Ha egy szög csúcsa egy adott körvonal egy pontja, szárai a kör két húrja, vagy egy húrja és egy érintője a húr egyik végpontjában, akkor a szöget kerületi szögnek nevezzük.
+		Ha egy szög csúcsa egy adott körvonal egy pontja, egyik szára a kör húrja, másik szára a körvonal adott pontbeli érintője, akkor a szöget érintőszárú kerületi szögnek nevezzük.
 	\end{definition}
 	\begin{theorem}[Középponti és kerületi szögek tétele]
 		Adott körben adott ívhez tartozó bármely kerületi szög nagysága fele az ugyanazon ívhez tartozó középponti szög nagyságának.
 	\end{theorem}
+	\begin{proof}
+		4 eset van:
+		\begin{outline}[enumerate]
+			\1 Középponti és kerületi szög szára egy egyenesbe esik.
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=0.4\linewidth]{1sz}
+				\end{figure}
+				\2 $BOC$ egyenlő szárú, azaz: $OB=OC=r\implies OCB\angle=CBO\angle=\alpha$.
+				\2 $\beta$ $OBC$ külső szöge, egyenlő két nem mellette fekvő belső szög összegével: $\beta=2\alpha\implies\alpha=\frac{\beta}{2}$.
+			\1 A középponti szög csúcsa a kerületi szög belsejébe esik
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=0.4\linewidth]{2sz}
+				\end{figure}
+				\2 $BD$, $AD$ ívekhez tartozó szögek elhelyezkedése az 1. esetnek megfelelő, ezért: $\beta_1=2\alpha_1$, $\beta_2=2\alpha_2$.
+				\2 $\implies \beta=\beta_1+\beta_2=2(\alpha_1+\alpha_2)\implies\alpha=\frac{\beta}{2}$
+			\1 A középponti szög csúcsa a kerületi szög szögtartományán kívül esik
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=0.4\linewidth]{3sz}
+				\end{figure}
+				\2 $\alpha=\alpha_1-\alpha_2,\ \beta=\beta_1-\beta_2$. Első eset miatt: $\alpha_1=\frac{\beta_1}{2},\ \alpha_2=\frac{\beta_2}{2}$
+				\2 $\implies \alpha=\frac{\beta}{2}$
+			\1 Érintőszárú a kerületi szög
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=0.8\linewidth]{4sz}
+				\end{figure}
+				\2 $\alpha<90\degree$
+					\3 $BAO\angle=ABO\angle=90\degree-\alpha\implies AOB\angle=2\alpha=\beta$
+					\3 $\implies \alpha=\frac{\beta}{2}$
+				\2 $\alpha=90\degree\implies\beta=180\degree\implies \alpha=\frac{\beta}{2}$
+				\2 $\alpha>90\degree$
+					\3  $BAO\angle=ABO\angle=90\degree-\alpha\implies AOB\angle= 180\degree- 2(\alpha-90\degree)=360\degree-2\alpha$
+					\3 $\implies\beta=2\alpha\implies\alpha=\frac{\beta}{2}$ 
+		\end{outline}
+	\end{proof}
 	\begin{theorem}[Kerületi szögek tétele]
 		Egyenlő sugarú körökben az azonos hosszúságú ívekhez tartozó kerületi szögek egyenlő nagyságúak.
 	\end{theorem}
@@ -2472,20 +2510,6 @@
 	\begin{definition}
 		Azokat a négyszögeket, amelyeknek van köré írható körük, húrnégyszögeknek nevezzük.
 	\end{definition}
-	\begin{theorem}
-		Ha egy négyszög húrnégyszög, akkor szemközti szögeinek összege 180\degree
-	\end{theorem}
-	\begin{theorem}
-		Ha egy négyszög szemközti szögeinek összege 180\degree, akkor az húrnégyszög.
-	\end{theorem}
-	\begin{proof}
-		Tegyük fel, hogy létezik olyan négyszög, melynek szemközti szögeinek összege 180\degree, és nem húrnégyszög, vagyis az egyik csúcs $(C)$ nem illeszkedik a másik három által meghatározott körre. Legyen $P$ a $DC$ egyenesnek és a körnek metszéspontja. Legyen $DAB\angle=\alpha\implies BCD\angle=180\degree-\alpha\implies BCP\angle=\alpha$.
-		\begin{figure}[H]
-			\centering
-			\includegraphics[width=0.4\linewidth]{HúrBiz}
-		\end{figure}
-		$ABPD$ húrnégyszög, azaz  $DPB\angle=180\degree-\alpha$. Ebből következik, hogy $BPC$ háromszög egyik szöge $\alpha$, másik szöge $180\degree-\alpha$, amik összege a harmadik szög nélkül $180\degree$, ez viszont nem lehet, mert ellentmond a belső szögek összegére vonatkozó tételnek. Ellentmondásra jutottunk, emiatt a feltevésünk hamis, vagyis ha egy négyszög szemközti szögeinek összege 180\degree, akkor az húrnégyszög.
-	\end{proof}
 	\begin{theorem}[Húrnégyszög-tétel]
 		Egy négyszög akkor és csak akkor húrnégyszög, ha szemközti szögeinek összege 180\degree.
 	\end{theorem}
@@ -2886,6 +2910,9 @@
 		A kör azon pontok halmaza a síkon, amelyek egy adott ponttól adott távolságra vannak.
 		Az adott pontot a kör középpontjának, az adott távolságot a kör sugarának nevezzük.
 	\end{definition}
+	\begin{definition}
+		A kört megkapjuk, ha egy egyenes körkúpot alaplapjával párhuzamos síkkal elmetszünk.
+	\end{definition}
 	\begin{theorem}
 		A $C(u;v)$ középpontú $r$ sugarú kör egyenlete $(x-u)^2+(y-v)^2=r^2$
 	\end{theorem}
@@ -2908,6 +2935,9 @@
 		nem illeszkedő $F$ ponttól egyenlő távolságra vannak. Az egyenes a parabola direktrixe (vezéregyenese), a pont a parabola fókuszpontja.
 	\end{definition}
 	A direktrix és a fókuszpont távolsága a parabola paramétere ($p>0$). A fókuszpontra illeszkedő, a direktrixre merőleges egyenes a parabola szimmetriatengelye, vagy tengelye (t). A parabola tengelyen lévő pontja a parabola tengelypontja (T). A tengelypont felezi a fókuszpont és a direktrix távolságát.
+	\begin{definition}
+		A parabolát megkapjuk, ha egy egyenes körkúpot egy olyan síkkal elmetszünk, amely csak a kúp egyik alkotójával párhuzamos.
+	\end{definition}
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.4\linewidth]{Par}
@@ -2942,12 +2972,6 @@
 		\end{figure}
 	\end{theorem}
 	Minden másodfokú függvény grafikonja az y tengellyel párhuzamos tengelyű parabola, és minden y tengellyel párhuzamos tengelyű parabola valamelyik másodfokú függvény grafikonja.
-	\begin{theorem}
-		Parabola egyenlete általános esetben, ha a direktrix: $ax+by+c=0$, fókuszpont: $F(f_1;f_2)$:
-		\begin{equation*}
-		\frac{(ax+by+c)^2}{a^2+b^2}=(x-f_1)^2+(y-f_2)^2
-		\end{equation*}
-	\end{theorem}
 \section{Kör és egyenes kölcsönös helyzete}
 	Egy síkban egy körnek és egy egyenesnek háromféle helyzete lehet: nincs közös pontjuk, egy közös pontjuk van (az egyenes érinti a kört), két közös pontjuk van (az egyenes metszi a kört).
 	\begin{figure}[H]
